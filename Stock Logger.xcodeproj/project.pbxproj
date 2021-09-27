@@ -56,15 +56,23 @@
 		00FEBAE02701680600D10841 /* Stock Logger */ = {
 			isa = PBXGroup;
 			children = (
+				00FEBAF5270176A300D10841 /* Story Boards */,
 				00FEBAE12701680600D10841 /* AppDelegate.swift */,
 				00FEBAE32701680600D10841 /* SceneDelegate.swift */,
 				00FEBAE52701680600D10841 /* ViewController.swift */,
-				00FEBAE72701680600D10841 /* Main.storyboard */,
 				00FEBAEA2701680B00D10841 /* Assets.xcassets */,
-				00FEBAEC2701680B00D10841 /* LaunchScreen.storyboard */,
 				00FEBAEF2701680B00D10841 /* Info.plist */,
 			);
 			path = "Stock Logger";
+			sourceTree = "<group>";
+		};
+		00FEBAF5270176A300D10841 /* Story Boards */ = {
+			isa = PBXGroup;
+			children = (
+				00FEBAE72701680600D10841 /* Main.storyboard */,
+				00FEBAEC2701680B00D10841 /* LaunchScreen.storyboard */,
+			);
+			path = "Story Boards";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
