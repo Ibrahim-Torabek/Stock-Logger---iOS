@@ -21,6 +21,12 @@
 /* Begin PBXFileReference section */
 		003D7A0B271D0B0F00C088D0 /* AddStockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStockViewController.swift; sourceTree = "<group>"; };
 		00914F44271FA9BE009FB9E2 /* Stock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stock.swift; sourceTree = "<group>"; };
+		00914F46271FC00A009FB9E2 /* SoldStock+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SoldStock+CoreDataClass.swift"; sourceTree = "<group>"; };
+		00914F47271FC00A009FB9E2 /* SoldStock+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SoldStock+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		00914F48271FC00A009FB9E2 /* Stock+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Stock+CoreDataClass.swift"; sourceTree = "<group>"; };
+		00914F49271FC00A009FB9E2 /* Stock+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Stock+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		00914F4A271FC00A009FB9E2 /* ActiveStock+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ActiveStock+CoreDataClass.swift"; sourceTree = "<group>"; };
+		00914F4B271FC00A009FB9E2 /* ActiveStock+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ActiveStock+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		00B11A17271A59BF00BFA504 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		00FEBADE2701680600D10841 /* Stock Logger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Stock Logger.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		00FEBAE12701680600D10841 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -62,6 +68,12 @@
 		00914F43271FA94B009FB9E2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				00914F46271FC00A009FB9E2 /* SoldStock+CoreDataClass.swift */,
+				00914F47271FC00A009FB9E2 /* SoldStock+CoreDataProperties.swift */,
+				00914F48271FC00A009FB9E2 /* Stock+CoreDataClass.swift */,
+				00914F49271FC00A009FB9E2 /* Stock+CoreDataProperties.swift */,
+				00914F4A271FC00A009FB9E2 /* ActiveStock+CoreDataClass.swift */,
+				00914F4B271FC00A009FB9E2 /* ActiveStock+CoreDataProperties.swift */,
 				00914F44271FA9BE009FB9E2 /* Stock.swift */,
 			);
 			path = Models;
