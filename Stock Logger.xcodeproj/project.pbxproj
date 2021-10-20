@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		003D7A0C271D0B0F00C088D0 /* AddStockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003D7A0B271D0B0F00C088D0 /* AddStockViewController.swift */; };
-		00B11A18271A59BF00BFA504 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 00B11A16271A59BF00BFA504 /* Model.xcdatamodeld */; };
+		00914F45271FA9BE009FB9E2 /* Stock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00914F44271FA9BE009FB9E2 /* Stock.swift */; };
+		00B11A18271A59BF00BFA504 /* StockModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 00B11A16271A59BF00BFA504 /* StockModel.xcdatamodeld */; };
 		00FEBAE22701680600D10841 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FEBAE12701680600D10841 /* AppDelegate.swift */; };
 		00FEBAE42701680600D10841 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FEBAE32701680600D10841 /* SceneDelegate.swift */; };
 		00FEBAE62701680600D10841 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FEBAE52701680600D10841 /* ViewController.swift */; };
@@ -19,6 +20,7 @@
 
 /* Begin PBXFileReference section */
 		003D7A0B271D0B0F00C088D0 /* AddStockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStockViewController.swift; sourceTree = "<group>"; };
+		00914F44271FA9BE009FB9E2 /* Stock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stock.swift; sourceTree = "<group>"; };
 		00B11A17271A59BF00BFA504 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		00FEBADE2701680600D10841 /* Stock Logger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Stock Logger.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		00FEBAE12701680600D10841 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -44,9 +46,25 @@
 		003D7A0D271D0B1E00C088D0 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				00914F42271FA93F009FB9E2 /* New Group */,
 				003D7A0B271D0B0F00C088D0 /* AddStockViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		00914F42271FA93F009FB9E2 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		00914F43271FA94B009FB9E2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				00914F44271FA9BE009FB9E2 /* Stock.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		00FEBAD52701680600D10841 = {
@@ -68,8 +86,9 @@
 		00FEBAE02701680600D10841 /* Stock Logger */ = {
 			isa = PBXGroup;
 			children = (
+				00914F43271FA94B009FB9E2 /* Models */,
 				003D7A0D271D0B1E00C088D0 /* ViewControllers */,
-				00B11A16271A59BF00BFA504 /* Model.xcdatamodeld */,
+				00B11A16271A59BF00BFA504 /* StockModel.xcdatamodeld */,
 				00FEBAF5270176A300D10841 /* Story Boards */,
 				00FEBAE12701680600D10841 /* AppDelegate.swift */,
 				00FEBAE32701680600D10841 /* SceneDelegate.swift */,
@@ -162,8 +181,9 @@
 			files = (
 				00FEBAE62701680600D10841 /* ViewController.swift in Sources */,
 				00FEBAE22701680600D10841 /* AppDelegate.swift in Sources */,
+				00914F45271FA9BE009FB9E2 /* Stock.swift in Sources */,
 				00FEBAE42701680600D10841 /* SceneDelegate.swift in Sources */,
-				00B11A18271A59BF00BFA504 /* Model.xcdatamodeld in Sources */,
+				00B11A18271A59BF00BFA504 /* StockModel.xcdatamodeld in Sources */,
 				003D7A0C271D0B0F00C088D0 /* AddStockViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -386,13 +406,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		00B11A16271A59BF00BFA504 /* Model.xcdatamodeld */ = {
+		00B11A16271A59BF00BFA504 /* StockModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				00B11A17271A59BF00BFA504 /* Model.xcdatamodel */,
 			);
 			currentVersion = 00B11A17271A59BF00BFA504 /* Model.xcdatamodel */;
-			path = Model.xcdatamodeld;
+			path = StockModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
