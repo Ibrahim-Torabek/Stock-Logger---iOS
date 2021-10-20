@@ -7,15 +7,52 @@
 
 import UIKit
 
-class AddStockViewController: UITableViewController {
+class AddStockViewController: UITableViewController, UITextFieldDelegate {
+    //MARK: - Outlets
+    @IBOutlet weak var symbolTextField: UITextField!
+    @IBOutlet weak var companyNameTextField: UITextField!
+    @IBOutlet weak var priceTextField: UITextField!
+    @IBOutlet weak var quantityTextField: UITextField!
+    @IBOutlet weak var boughtDatePicker: UIDatePicker!
+    @IBOutlet weak var isUsdSwitch: UISwitch!
+    
 
     @IBAction func save(_ sender: Any) {
-        print("Saved")
+        
+        // Resign First Reponder
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+        //.resignFirstResponder()
+        
+        // To check wich field is empty, used sperated guard statements.
+        guard let symbol = isEmpty(symbolTextField),
+           let companyName = isEmpty(companyNameTextField),
+           let price = isDouble(priceTextField),
+           let quantityDouble = isDouble(quantityTextField) else{
+            return
+        }
+        
+        // got quantity as double when check it. Convert to Int know.
+        let quantity = Int(quantityDouble)
+        
+        print(price)
+        print(quantity)
+        
+        
+        //navigationController?.popViewController(animated: true)
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.layer.borderWidth = 0.0
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        symbolTextField.delegate = self
+        companyNameTextField.delegate = self
+        priceTextField.delegate = self
+        quantityTextField.delegate = self
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -35,7 +72,7 @@ class AddStockViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return 12
     }
-
+    
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
@@ -45,14 +82,50 @@ class AddStockViewController: UITableViewController {
         return cell
     }
     */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    //MARK: - Functions
+    /// Check if a UITextField is empty. if it is empty, return nil and set its border's color as red, else return the text
+    /// - Parameter textField: The UITextField that needs to check
+    /// - Returns: nil if empty, optional text if not empty.
+    func isEmpty(_ textField: UITextField) -> String?{
+        
+        guard let text = textField.text, !text.isEmpty else {
+            alertBorder(textField)
+            print("Opps!!!")
+            return nil
+        }
+        
+        return text
     }
-    */
+    
+    /// Check if a UITextField is double. if it is empty, return nil; if it is not a doubleable text, retun nil and set its border's color as red, else return the double value
+    /// - Parameter textField: The UITextField that needs to check
+    /// - Returns: nil if empty or cannot convert to double value, optional double value if doubleable
+    func isDouble(_ textField: UITextField) -> Double? {
+        
+        guard let text = textField.text else {
+            alertBorder(textField)
+            return nil
+        }
+        
+        let doubleValue = (text as NSString).doubleValue
+        
+        if doubleValue == 0.0 {
+            alertBorder(textField)
+            return nil
+        }
+        
+        return doubleValue
+    }
+    
+    
+    func alertBorder(_ textField: UITextField){
+        textField.layer.borderColor = CGColor.init(red: 1, green: 0, blue: 0, alpha: 1)
+        textField.layer.borderWidth = 0.5
+    }
+
+
+
 
     /*
     // Override to support editing the table view.
