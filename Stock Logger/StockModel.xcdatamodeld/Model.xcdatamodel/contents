@@ -4,7 +4,6 @@
         <attribute name="boughtDate" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="boughtPrice" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="quantity" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="symbol" attributeType="String"/>
         <attribute name="worth" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="stock" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Stock"/>
     </entity>
@@ -14,7 +13,6 @@
         <attribute name="soldDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="soldPrice" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="symbol" optional="YES" attributeType="String"/>
-        <relationship name="stock" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Stock"/>
     </entity>
     <entity name="Stock" representedClassName="Stock" syncable="YES" codeGenerationType="class">
         <attribute name="companyName" attributeType="String"/>
@@ -22,12 +20,14 @@
         <attribute name="quantity" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="symbol" attributeType="String"/>
         <attribute name="worth" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <relationship name="activeStocks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ActiveStock"/>
-        <relationship name="soldStocks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SoldStock"/>
+        <relationship name="activeStocks" toMany="YES" deletionRule="Nullify" destinationEntity="ActiveStock"/>
+        <fetchIndex name="bySymbolIndex">
+            <fetchIndexElement property="symbol" type="Binary" order="ascending"/>
+        </fetchIndex>
     </entity>
     <elements>
-        <element name="Stock" positionX="-63" positionY="-18" width="128" height="134"/>
-        <element name="ActiveStock" positionX="-54" positionY="27" width="128" height="119"/>
-        <element name="SoldStock" positionX="-36" positionY="72" width="128" height="119"/>
+        <element name="ActiveStock" positionX="-54" positionY="27" width="128" height="104"/>
+        <element name="SoldStock" positionX="-36" positionY="72" width="128" height="104"/>
+        <element name="Stock" positionX="-63" positionY="-18" width="128" height="119"/>
     </elements>
 </model>

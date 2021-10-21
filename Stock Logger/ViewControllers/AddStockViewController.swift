@@ -6,8 +6,17 @@
 //
 
 import UIKit
+import CoreData
 
 class AddStockViewController: UITableViewController, UITextFieldDelegate {
+    //MARK: - Properties
+    var coreDataStack = CoreDataStack(modelName: "StockModel")
+    
+    var stocks = [Stock]()
+    
+    var fetchedResultsController: NSFetchedResultsController<Stock>!
+    
+    
     //MARK: - Outlets
     @IBOutlet weak var symbolTextField: UITextField!
     @IBOutlet weak var companyNameTextField: UITextField!
@@ -32,10 +41,27 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
         }
         
         // got quantity as double when check it. Convert to Int know.
-        let quantity = Int(quantityDouble)
+        let quantity = Int16(quantityDouble)
         
-        print(price)
-        print(quantity)
+        
+        let stock = Stock(context: coreDataStack.managedContext)
+        let activeStock = ActiveStock(context: coreDataStack.managedContext)
+        
+        
+        stock.symbol = symbol
+        stock.quantity = quantity
+        stock.companyName = companyName
+        
+        activeStock.quantity = quantity
+        activeStock.boughtDate = boughtDatePicker.date
+        activeStock.boughtPrice = price
+        // TODO: calculate worth
+        activeStock.worth = price
+        activeStock.stock = stock
+        stock.addToActiveStocks(activeStock)
+        
+        coreDataStack.saveContext()
+        stocks.append(stock)
         
         
         //navigationController?.popViewController(animated: true)
@@ -49,10 +75,15 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Set delegate for UITextFields
         symbolTextField.delegate = self
         companyNameTextField.delegate = self
         priceTextField.delegate = self
         quantityTextField.delegate = self
+        
+
+        //Load
+        loadSavedData()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -123,6 +154,34 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
         textField.layer.borderColor = CGColor.init(red: 1, green: 0, blue: 0, alpha: 1)
         textField.layer.borderWidth = 0.5
     }
+    
+    func loadSavedData(){
+            
+        let request = Stock.fetchRequest()
+        let activeStocksRequest = ActiveStock.fetchRequest()
+        
+        do {
+            stocks = try coreDataStack.managedContext.fetch(request)
+            
+            if let symbol = stocks[1].activeStocks?.count {
+                print("Symbol: \(symbol)")
+            }
+            
+            stocks.map({
+                e in
+
+                if let active = e.activeStocks?.allObjects as? [ActiveStock], !active.isEmpty {
+                
+                    print("Symbol: \(active[0].boughtPrice)")
+                    
+                }
+            })
+
+
+        } catch {
+            print("Fating Error!!!")
+        }
+    }
 
 
 
@@ -164,4 +223,17 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
     }
     */
 
+}
+
+//MARK: - Fetch Reqeust Delegate
+extension AddStockViewController: NSFetchedResultsControllerDelegate{
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .delete:
+            print(tableView.numberOfRows(inSection: 0))
+            
+        default:
+            break
+        }
+    }
 }
