@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19206" systemVersion="20G165" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19461" systemVersion="20G165" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="ActiveStock" representedClassName="ActiveStock" syncable="YES" codeGenerationType="class">
         <attribute name="boughtDate" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="boughtPrice" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="quantity" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="worth" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <relationship name="stock" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Stock"/>
+        <relationship name="stock" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Stock" inverseName="activeStocks" inverseEntity="Stock"/>
     </entity>
     <entity name="SoldStock" representedClassName="SoldStock" syncable="YES" codeGenerationType="class">
         <attribute name="earnings" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -16,11 +16,12 @@
     </entity>
     <entity name="Stock" representedClassName="Stock" syncable="YES" codeGenerationType="class">
         <attribute name="companyName" attributeType="String"/>
+        <attribute name="earnings" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="price" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="quantity" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="symbol" attributeType="String"/>
         <attribute name="worth" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <relationship name="activeStocks" toMany="YES" deletionRule="Nullify" destinationEntity="ActiveStock"/>
+        <relationship name="activeStocks" toMany="YES" deletionRule="Nullify" destinationEntity="ActiveStock" inverseName="stock" inverseEntity="ActiveStock"/>
         <fetchIndex name="bySymbolIndex">
             <fetchIndexElement property="symbol" type="Binary" order="ascending"/>
         </fetchIndex>
@@ -28,6 +29,6 @@
     <elements>
         <element name="ActiveStock" positionX="-54" positionY="27" width="128" height="104"/>
         <element name="SoldStock" positionX="-36" positionY="72" width="128" height="104"/>
-        <element name="Stock" positionX="-63" positionY="-18" width="128" height="119"/>
+        <element name="Stock" positionX="-63" positionY="-18" width="128" height="134"/>
     </elements>
 </model>

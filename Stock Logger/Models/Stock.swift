@@ -7,15 +7,28 @@
 
 import Foundation
 
+struct GlobalQuote: Codable {
+    var stockDetail: StockDetail
+    
+    enum CodingKeys: String, CodingKey{
+        case stockDetail = "Global Quote"
+    }
+}
+
+struct BestMetches: Codable {
+    var bestMatches: [StockDetail]
+}
+
+
 // Got more information for the future.
-struct StockInfo: Codable {
-    var symbol: String
-    var companyName: String
-    var price: Double
-    var open: Double
-    var high: Double
-    var change: Double
-    var currency: String
+struct StockDetail: Codable {
+    var symbol: String?
+    var companyName: String?
+    var price: String?
+    var open: String?
+    var high: String?
+    var change: String?
+    var currency: String?
     
     enum CodingKeys: String, CodingKey{
         case symbol = "01. symbol"
