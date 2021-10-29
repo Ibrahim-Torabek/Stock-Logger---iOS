@@ -44,7 +44,7 @@ class ViewController: UIViewController {
             stocks = try coreDataStack.managedContext.fetch(request)
 
         } catch {
-            print("Fating Error!!!")
+            print("Fetching Error!!!")
         }
         
         for stock in stocks {
@@ -58,14 +58,6 @@ class ViewController: UIViewController {
         
     }
     
-    
-
-    
-    func loadStockDetail(){
-        
-    }
-    
-    
 
 
 }
@@ -77,7 +69,11 @@ extension ViewController: UITableViewDelegate{
         super.viewWillAppear(animated)
         
         loadStockData()
-        loadStockDetail()
+        
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Stocks in Stock"
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -124,6 +120,13 @@ extension ViewController:UITableViewDataSource{
         cell.highLowImage.image = image
         
         return cell;
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let index = stockListTableView.indexPathForSelectedRow else { return }
+        
+        let vc = segue.destination as! StockDetailViewController
+        vc.stock = stocks[index.row]
     }
     
     
@@ -286,8 +289,9 @@ extension ViewController:UITableViewDataSource{
 class StockCell: UITableViewCell {
     @IBOutlet weak var symbolLabel: UILabel!
     @IBOutlet weak var companyNameLabel: UILabel!
-    @IBOutlet weak var priceLabel: UILabel!
-    @IBOutlet weak var erningsLabel: UILabel!
+    @IBOutlet weak var priceLabel: CurrencyLabel!
+    @IBOutlet weak var erningsLabel: CurrencyLabel!
     @IBOutlet weak var highLowImage: UIImageView!
 }
+
 

@@ -67,7 +67,7 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
         stocks.append(stock)
         
         
-        //navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
