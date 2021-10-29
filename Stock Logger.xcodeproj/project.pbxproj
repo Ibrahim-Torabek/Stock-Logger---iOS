@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		003D7A0C271D0B0F00C088D0 /* AddStockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003D7A0B271D0B0F00C088D0 /* AddStockViewController.swift */; };
 		00914F45271FA9BE009FB9E2 /* Stock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00914F44271FA9BE009FB9E2 /* Stock.swift */; };
+		00A2BEF2272C4D5C00B1DBF5 /* StockDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A2BEF1272C4D5C00B1DBF5 /* StockDetailViewController.swift */; };
+		00A2BEF4272C507400B1DBF5 /* CurrencyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A2BEF3272C507400B1DBF5 /* CurrencyLabel.swift */; };
 		00B11A18271A59BF00BFA504 /* StockModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 00B11A16271A59BF00BFA504 /* StockModel.xcdatamodeld */; };
 		00D39DAE2721055900A21104 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D39DAD2721055900A21104 /* CoreDataStack.swift */; };
 		00FEBAE22701680600D10841 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FEBAE12701680600D10841 /* AppDelegate.swift */; };
@@ -22,6 +24,8 @@
 /* Begin PBXFileReference section */
 		003D7A0B271D0B0F00C088D0 /* AddStockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStockViewController.swift; sourceTree = "<group>"; };
 		00914F44271FA9BE009FB9E2 /* Stock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stock.swift; sourceTree = "<group>"; };
+		00A2BEF1272C4D5C00B1DBF5 /* StockDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockDetailViewController.swift; sourceTree = "<group>"; };
+		00A2BEF3272C507400B1DBF5 /* CurrencyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyLabel.swift; sourceTree = "<group>"; };
 		00B11A17271A59BF00BFA504 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		00D39DAD2721055900A21104 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		00FEBADE2701680600D10841 /* Stock Logger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Stock Logger.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -48,17 +52,11 @@
 		003D7A0D271D0B1E00C088D0 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				00914F42271FA93F009FB9E2 /* New Group */,
+				00FEBAE52701680600D10841 /* ViewController.swift */,
 				003D7A0B271D0B0F00C088D0 /* AddStockViewController.swift */,
+				00A2BEF1272C4D5C00B1DBF5 /* StockDetailViewController.swift */,
 			);
 			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		00914F42271FA93F009FB9E2 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
 			sourceTree = "<group>";
 		};
 		00914F43271FA94B009FB9E2 /* Models */ = {
@@ -66,6 +64,7 @@
 			children = (
 				00914F44271FA9BE009FB9E2 /* Stock.swift */,
 				00D39DAD2721055900A21104 /* CoreDataStack.swift */,
+				00A2BEF3272C507400B1DBF5 /* CurrencyLabel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -95,7 +94,6 @@
 				00FEBAF5270176A300D10841 /* Story Boards */,
 				00FEBAE12701680600D10841 /* AppDelegate.swift */,
 				00FEBAE32701680600D10841 /* SceneDelegate.swift */,
-				00FEBAE52701680600D10841 /* ViewController.swift */,
 				00FEBAEA2701680B00D10841 /* Assets.xcassets */,
 				00FEBAEF2701680B00D10841 /* Info.plist */,
 			);
@@ -182,12 +180,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00A2BEF2272C4D5C00B1DBF5 /* StockDetailViewController.swift in Sources */,
 				00D39DAE2721055900A21104 /* CoreDataStack.swift in Sources */,
 				00FEBAE62701680600D10841 /* ViewController.swift in Sources */,
 				00FEBAE22701680600D10841 /* AppDelegate.swift in Sources */,
 				00914F45271FA9BE009FB9E2 /* Stock.swift in Sources */,
 				00FEBAE42701680600D10841 /* SceneDelegate.swift in Sources */,
 				00B11A18271A59BF00BFA504 /* StockModel.xcdatamodeld in Sources */,
+				00A2BEF4272C507400B1DBF5 /* CurrencyLabel.swift in Sources */,
 				003D7A0C271D0B0F00C088D0 /* AddStockViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

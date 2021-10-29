@@ -11,9 +11,7 @@ import CoreData
 class AddStockViewController: UITableViewController, UITextFieldDelegate {
     //MARK: - Properties
     var coreDataStack = CoreDataStack(modelName: "StockModel")
-    
     var stocks = [Stock]()
-    
     var fetchedResultsController: NSFetchedResultsController<Stock>!
     
     
@@ -46,25 +44,30 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
         
         let stock = Stock(context: coreDataStack.managedContext)
         let activeStock = ActiveStock(context: coreDataStack.managedContext)
-        
+        let worth = price  + 2.0 * 5.59 / Double(quantity)
+
         
         stock.symbol = symbol
         stock.quantity = quantity
         stock.companyName = companyName
+        stock.price = price
+        stock.worth = worth
+         
         
         activeStock.quantity = quantity
         activeStock.boughtDate = boughtDatePicker.date
         activeStock.boughtPrice = price
-        // TODO: calculate worth
-        activeStock.worth = price
+        activeStock.worth = worth
         activeStock.stock = stock
         stock.addToActiveStocks(activeStock)
+        
+        
         
         coreDataStack.saveContext()
         stocks.append(stock)
         
         
-        //navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -158,24 +161,20 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
     func loadSavedData(){
             
         let request = Stock.fetchRequest()
-        let activeStocksRequest = ActiveStock.fetchRequest()
         
         do {
             stocks = try coreDataStack.managedContext.fetch(request)
             
-            if let symbol = stocks[1].activeStocks?.count {
-                print("Symbol: \(symbol)")
-            }
-            
-            stocks.map({
-                e in
-
-                if let active = e.activeStocks?.allObjects as? [ActiveStock], !active.isEmpty {
-                
-                    print("Symbol: \(active[0].boughtPrice)")
-                    
-                }
-            })
+            //TODO: - Delete following sentence
+//            stocks.map({
+//                e in
+//
+//                if let active = e.activeStocks?.allObjects as? [ActiveStock], !active.isEmpty {
+//
+//                    print("Symbol: \(active[0].boughtPrice)")
+//
+//                }
+//            })
 
 
         } catch {
