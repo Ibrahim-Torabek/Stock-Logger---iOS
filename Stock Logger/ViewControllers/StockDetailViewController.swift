@@ -10,12 +10,41 @@ import UIKit
 class StockDetailViewController: UIViewController {
     //MARK: - Properties
     var stock: Stock!
-
+    var activeStocks = [ActiveStock]()
+    
+    
+    //MARK: - Outlets
+    @IBOutlet weak var companyNameLabel: UILabel!
+    @IBOutlet weak var quantityLabel: UILabel!
+    @IBOutlet weak var priceLabel: CurrencyLabel!
+    @IBOutlet weak var earningsLabel: CurrencyLabel!
+    
+    @IBOutlet weak var tableView: UITableView!
+    
+    
+    //MARK: - Actions
+    @IBAction func deCreaseButton(_ sender: UIButton) {
+    }
+    
+    @IBAction func inCreaseButton(_ sender: UIButton) {
+    }
+    
+    
+    //MARK: - View Did Load
     override func viewDidLoad() {
         super.viewDidLoad()
 
         title = stock.symbol
-        // Do any additional setup after loading the view.
+        
+        companyNameLabel.text = stock.companyName
+        quantityLabel.text = "\(stock.quantity)"
+        priceLabel.text = "\(stock.price)"
+        earningsLabel.text = "\(stock.earnings)"
+        
+        //Set tabel view delegate and datasource
+        tableView.delegate = self
+        tableView.dataSource = self
+        
     }
     
 
@@ -29,4 +58,57 @@ class StockDetailViewController: UIViewController {
     }
     */
 
+}
+
+//MARK: - Table View Delegate
+extension StockDetailViewController: UITableViewDelegate{
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        activeStocks = (stock.activeStocks?.allObjects as? [ActiveStock])!
+    }
+}
+
+
+
+//MARK: - Table View Data Source
+extension StockDetailViewController: UITableViewDataSource{
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Bought History"
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return activeStocks.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCell", for: indexPath) as! DetailCell
+        
+        
+        //TODO: - Put data formatter a better place
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM d, y"
+
+        
+        let activeStock = activeStocks[indexPath.row]
+        cell.boutDateLabel.text = "\(dateFormatter.string(from: activeStock.boughtDate!))"
+        cell.quantityLabel.text = "\(activeStock.quantity)"
+        cell.priceLabel.text = "\(activeStock.boughtPrice)"
+        
+        
+        return cell
+    }
+    
+    
+}
+
+
+
+//MARK: - Custom Table View Cell
+class DetailCell: UITableViewCell{
+    //MARK: - Cell Outlets
+    @IBOutlet weak var boutDateLabel: UILabel!
+    @IBOutlet weak var quantityLabel: UILabel!
+    @IBOutlet weak var priceLabel: UILabel!
 }
