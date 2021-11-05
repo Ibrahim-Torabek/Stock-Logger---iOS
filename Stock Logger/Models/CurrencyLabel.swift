@@ -17,46 +17,24 @@ class CurrencyLabel: UILabel {
     }
     */
 
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)!
-
-        initCustomFont()
-    }
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-
-        initCustomFont()
-    }
-    
-    
-    private func initCustomFont() {
-        
-        print("Custom Font")
-        if let textStyle = font.fontDescriptor.object(forKey: UIFontDescriptor.AttributeName.textStyle) as? UIFont.TextStyle {
-            let fontMetrics = UIFontMetrics(forTextStyle: textStyle)
-            var customFont: UIFont?
-
-            switch textStyle {
-            case .body:
-                customFont = UIFont(name: "MyAwesomeBODYFont", size: 21)
-
-            case .headline:
-                customFont = UIFont(name: "MyAwesomeHeadlineFont", size: 48)
-
-            // all other cases...
-
-            default:
-                return
+    override func draw(_ rect: CGRect) {
+        if let text = text, let amount = Double(text) {
+            
+            if amount > 0.0 {
+                self.textColor = UIColor.blue
             }
-
-            guard let font = customFont else {
-                fatalError("Failed to load a custom font! Make sure the font file is included in the project and the font is added to the Info.plist.")
+            if amount < 0.0 {
+                self.textColor = UIColor.red
             }
-
-            self.font = fontMetrics.scaledFont(for: font)
+            
+            
+            self.text = "$"  + String(format: "%.4f", amount)
         }
+        
+        super.draw(rect)
     }
+    
+    
 }
 
 
