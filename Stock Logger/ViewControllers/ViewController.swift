@@ -79,14 +79,49 @@ extension ViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         switch editingStyle{
         case .delete:
-            let selected = stocks[indexPath.row]
-            ViewController.coreDataStack.managedContext.delete(selected)
+            let selectedStock = stocks[indexPath.row]
+            ViewController.coreDataStack.managedContext.delete(selectedStock)
             ViewController.coreDataStack.saveContext()
             stocks.remove(at: indexPath.row)
             stockListTableView.deleteRows(at: [indexPath], with: .automatic)
+            
+            
         default:
             break
         }
+    }
+    
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let action = UIContextualAction(style: .normal, title: "Edit", handler: {
+            action, view, perormed in
+            perormed(true)
+            print(indexPath.row)
+        })
+        
+        action.backgroundColor = UIColor.systemBlue
+        action.image = UIImage(systemName: "square.and.pencil")
+        
+        return UISwipeActionsConfiguration(actions: [action])
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let action = UIContextualAction(style: .normal, title: "Delete", handler: {
+            action, view, perormed in
+            
+            let selectedStock = self.stocks[indexPath.row]
+            ViewController.coreDataStack.managedContext.delete(selectedStock)
+            ViewController.coreDataStack.saveContext()
+            self.stocks.remove(at: indexPath.row)
+            self.stockListTableView.deleteRows(at: [indexPath], with: .automatic)
+            
+            perormed(true)
+            print(indexPath.row)
+        })
+        
+        action.backgroundColor = UIColor.systemRed
+        action.image = UIImage(systemName: "trash.fill")
+        
+        return UISwipeActionsConfiguration(actions: [action])
     }
 }
 
