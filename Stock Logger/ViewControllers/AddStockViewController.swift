@@ -14,6 +14,9 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
     var stocks = [Stock]()
     var fetchedResultsController: NSFetchedResultsController<Stock>!
     
+    var stock: Stock!
+    var inCreaseDeCrease = 0
+    
     
     //MARK: - Outlets
     @IBOutlet weak var symbolTextField: UITextField!
@@ -84,6 +87,15 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
         priceTextField.delegate = self
         quantityTextField.delegate = self
         
+        
+        if inCreaseDeCrease != 0 {
+            symbolTextField.text = stock.symbol!
+            symbolTextField.isEnabled = false
+            companyNameTextField.text = stock.companyName!
+            companyNameTextField.isEnabled = false
+            
+            
+        }
 
         //Load
         loadSavedData()

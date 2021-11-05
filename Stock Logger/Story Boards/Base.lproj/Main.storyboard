@@ -46,7 +46,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="123.32" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F23-CJ-Hzg">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="123.32" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F23-CJ-Hzg" customClass="CurrencyLabel" customModule="Stock_Logger" customModuleProvider="target">
                                                     <rect key="frame" x="59" y="60" width="49" height="19"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                                     <nil key="textColor"/>
@@ -58,7 +58,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="123.12" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tvB-wd-CRc">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="123.12" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tvB-wd-CRc" customClass="CurrencyLabel" customModule="Stock_Logger" customModuleProvider="target">
                                                     <rect key="frame" x="307.5" y="60" width="49" height="19"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                                     <nil key="textColor"/>
@@ -281,13 +281,13 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IzR-Gc-ys2">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IzR-Gc-ys2" customClass="CurrencyLabel" customModule="Stock_Logger" customModuleProvider="target">
                                         <rect key="frame" x="148.5" y="124" width="46" height="23"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="djP-Il-rvT">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="djP-Il-rvT" customClass="CurrencyLabel" customModule="Stock_Logger" customModuleProvider="target">
                                         <rect key="frame" x="148.5" y="157" width="46" height="23"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                         <nil key="textColor"/>
@@ -354,7 +354,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w4a-Vb-lSQ">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w4a-Vb-lSQ" customClass="CurrencyLabel" customModule="Stock_Logger" customModuleProvider="target">
                                                     <rect key="frame" x="352" y="11" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -389,6 +389,7 @@
                                 <buttonConfiguration key="configuration" style="plain" title="Decrease ( - )"/>
                                 <connections>
                                     <action selector="deCreaseButton:" destination="NUc-WE-ecX" eventType="touchUpInside" id="jbz-oD-XN2"/>
+                                    <segue destination="8IO-lW-pXV" kind="show" id="r6a-Z0-uXs"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a6r-wK-4eG">
@@ -398,6 +399,7 @@
                                 <buttonConfiguration key="configuration" style="plain" title="Increase ( + )"/>
                                 <connections>
                                     <action selector="inCreaseButton:" destination="NUc-WE-ecX" eventType="touchUpInside" id="ydQ-X5-DJg"/>
+                                    <segue destination="8IO-lW-pXV" kind="show" id="m4s-wy-NGb"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -422,7 +424,9 @@
                     <navigationItem key="navigationItem" id="5Y7-sn-6Es"/>
                     <connections>
                         <outlet property="companyNameLabel" destination="n26-gX-ey0" id="CZA-Hg-Ge3"/>
+                        <outlet property="deCreaseButton" destination="CxZ-ca-Tq0" id="2uO-gQ-cdC"/>
                         <outlet property="earningsLabel" destination="djP-Il-rvT" id="i2O-MU-9aQ"/>
+                        <outlet property="inCreaseButton" destination="a6r-wK-4eG" id="RVg-kV-xOo"/>
                         <outlet property="priceLabel" destination="IzR-Gc-ys2" id="8Db-FP-YY6"/>
                         <outlet property="quantityLabel" destination="Eaa-hX-vHG" id="x9h-nR-EKv"/>
                         <outlet property="tableView" destination="1XO-M5-GJn" id="3ue-2b-mNy"/>
@@ -430,7 +434,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5ol-nC-Eyf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2615.9420289855075" y="470.75892857142856"/>
+            <point key="canvasLocation" x="2796" y="191"/>
         </scene>
         <!--Add Stock-->
         <scene sceneID="5dD-Un-mbf">
@@ -692,7 +696,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g2v-h1-iMu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3420.289855072464" y="101.78571428571428"/>
+            <point key="canvasLocation" x="3690" y="-155"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="FJJ-ot-e4P">
@@ -735,6 +739,9 @@
             <point key="canvasLocation" x="34.782608695652179" y="83.705357142857139"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="m4s-wy-NGb"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="High-Icon" width="512" height="512"/>
         <image name="Sold" width="48" height="48"/>

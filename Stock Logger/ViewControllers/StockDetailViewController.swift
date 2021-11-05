@@ -18,8 +18,10 @@ class StockDetailViewController: UIViewController {
     @IBOutlet weak var quantityLabel: UILabel!
     @IBOutlet weak var priceLabel: CurrencyLabel!
     @IBOutlet weak var earningsLabel: CurrencyLabel!
-    
     @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet weak var inCreaseButton: UIButton!
+    @IBOutlet weak var deCreaseButton: UIButton!
     
     
     //MARK: - Actions
@@ -27,6 +29,30 @@ class StockDetailViewController: UIViewController {
     }
     
     @IBAction func inCreaseButton(_ sender: UIButton) {
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        guard let button = sender as? UIButton else { return }
+        
+        let vc = segue.destination as? AddStockViewController
+        vc?.stock = stock
+
+        switch button {
+        case inCreaseButton:
+            vc?.inCreaseDeCrease = 1
+            vc?.title = "Increasing \(self.stock.symbol!)"
+            
+        case deCreaseButton:
+            vc?.inCreaseDeCrease = -1
+            vc?.title = "Decreasing \(self.stock.symbol!)"
+
+        default:
+            break
+        }
+        
+        
     }
     
     
