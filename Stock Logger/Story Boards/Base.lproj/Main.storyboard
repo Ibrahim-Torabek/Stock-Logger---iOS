@@ -64,8 +64,8 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="High-Icon" translatesAutoresizingMaskIntoConstraints="NO" id="jFj-fk-NM6" userLabel="High-Low-Icons">
-                                                    <rect key="frame" x="15" y="10" width="45" height="45"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="square.and.pencil" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="jFj-fk-NM6" userLabel="High-Low-Icons">
+                                                    <rect key="frame" x="15" y="10" width="45" height="43.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="45" id="r92-Lb-d9Z"/>
                                                         <constraint firstAttribute="width" constant="45" id="x4n-cs-Aya"/>
@@ -184,7 +184,7 @@
                     <navigationItem key="navigationItem" title="Stock Logger" id="rWH-rG-2f9">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="plus" catalog="system" id="nZc-dJ-2HL">
                             <connections>
-                                <segue destination="8IO-lW-pXV" kind="show" id="iRq-df-MF4"/>
+                                <segue destination="8IO-lW-pXV" kind="show" identifier="AddEditStock" id="iRq-df-MF4"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -270,49 +270,49 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Earnings:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fak-s7-zbE">
-                                        <rect key="frame" x="20" y="157" width="120.5" height="23"/>
+                                        <rect key="frame" x="20" y="172" width="120.5" height="23"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eaa-hX-vHG">
-                                        <rect key="frame" x="148.5" y="73" width="46" height="23"/>
+                                        <rect key="frame" x="148.5" y="88" width="46" height="23"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IzR-Gc-ys2" customClass="CurrencyLabel" customModule="Stock_Logger" customModuleProvider="target">
-                                        <rect key="frame" x="148.5" y="129" width="46" height="23"/>
+                                        <rect key="frame" x="148.5" y="144" width="46" height="23"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="djP-Il-rvT" customClass="CurrencyLabel" customModule="Stock_Logger" customModuleProvider="target">
-                                        <rect key="frame" x="148.5" y="157" width="46" height="23"/>
+                                        <rect key="frame" x="148.5" y="172" width="46" height="23"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Price:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fpX-KW-AxE">
-                                        <rect key="frame" x="20" y="129" width="120.5" height="23"/>
+                                        <rect key="frame" x="20" y="144" width="120.5" height="23"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total in Stock:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qjy-Ax-o0P">
-                                        <rect key="frame" x="20" y="73" width="118.5" height="23"/>
+                                        <rect key="frame" x="20" y="88" width="118.5" height="23"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Worth:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ukd-if-jeL">
-                                        <rect key="frame" x="20" y="101" width="120.5" height="23"/>
+                                        <rect key="frame" x="20" y="116" width="120.5" height="23"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g1a-Aj-mgf" customClass="CurrencyLabel" customModule="Stock_Logger" customModuleProvider="target">
-                                        <rect key="frame" x="148.5" y="101" width="46" height="23"/>
+                                        <rect key="frame" x="148.5" y="116" width="46" height="23"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -333,7 +333,7 @@
                                     <constraint firstAttribute="height" constant="200" id="QJe-HT-gTd"/>
                                     <constraint firstItem="fpX-KW-AxE" firstAttribute="top" secondItem="ukd-if-jeL" secondAttribute="bottom" constant="5" id="REC-mO-9Sb"/>
                                     <constraint firstItem="n26-gX-ey0" firstAttribute="top" secondItem="1Cf-TQ-IEy" secondAttribute="top" constant="5" id="Tob-9l-Cpu"/>
-                                    <constraint firstAttribute="bottom" secondItem="fak-s7-zbE" secondAttribute="bottom" constant="20" id="Y8Y-ot-uIw"/>
+                                    <constraint firstAttribute="bottom" secondItem="fak-s7-zbE" secondAttribute="bottom" constant="5" id="Y8Y-ot-uIw"/>
                                     <constraint firstItem="Qjy-Ax-o0P" firstAttribute="leading" secondItem="n26-gX-ey0" secondAttribute="leading" id="ZbM-sY-m16"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Eaa-hX-vHG" secondAttribute="trailing" constant="20" symbolic="YES" id="daU-xH-B3n"/>
                                     <constraint firstItem="fak-s7-zbE" firstAttribute="top" secondItem="fpX-KW-AxE" secondAttribute="bottom" constant="5" id="djb-wt-NOK"/>
@@ -354,20 +354,20 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DetailCell" id="IRR-XX-Gay" customClass="DetailCell" customModule="Stock_Logger" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="IRR-XX-Gay" id="IZJ-zY-2ay">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dBI-cJ-y9t">
-                                                    <rect key="frame" x="20" y="11" width="42" height="21.5"/>
+                                                    <rect key="frame" x="20" y="11" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fQr-L0-mi4">
-                                                    <rect key="frame" x="186" y="11" width="42" height="21.5"/>
+                                                    <rect key="frame" x="186" y="11" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -453,7 +453,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5ol-nC-Eyf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2796" y="191"/>
+            <point key="canvasLocation" x="2817" y="372"/>
         </scene>
         <!--Add Stock-->
         <scene sceneID="5dD-Un-mbf">
@@ -759,13 +759,13 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="m4s-wy-NGb"/>
+        <segue reference="iRq-df-MF4"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="High-Icon" width="512" height="512"/>
         <image name="Sold" width="48" height="48"/>
         <image name="homekit" catalog="system" width="128" height="106"/>
         <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="square.and.pencil" catalog="system" width="128" height="115"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
