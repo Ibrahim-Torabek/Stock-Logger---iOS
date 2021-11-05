@@ -21,6 +21,7 @@ class StockDetailViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var inCreaseButton: UIButton!
+    @IBOutlet weak var worthLabel: CurrencyLabel!
     @IBOutlet weak var deCreaseButton: UIButton!
     
     
@@ -37,11 +38,15 @@ class StockDetailViewController: UIViewController {
         guard let button = sender as? UIButton else { return }
         
         let vc = segue.destination as? AddStockViewController
-        vc?.stock = stock
+        //vc?.stock = stock
 
+        vc?.cName = stock.companyName!
+        vc?.cSymbol = stock.symbol!
+        
         switch button {
         case inCreaseButton:
             vc?.inCreaseDeCrease = 1
+            
             vc?.title = "Increasing \(self.stock.symbol!)"
             
         case deCreaseButton:
@@ -64,6 +69,7 @@ class StockDetailViewController: UIViewController {
         
         companyNameLabel.text = stock.companyName
         quantityLabel.text = "\(stock.quantity)"
+        worthLabel.text = "\(stock.worth)"
         priceLabel.text = "\(stock.price)"
         earningsLabel.text = "\(stock.earnings)"
         
@@ -72,6 +78,8 @@ class StockDetailViewController: UIViewController {
         tableView.dataSource = self
         
     }
+    
+    
     
 
     /*
@@ -92,6 +100,10 @@ extension StockDetailViewController: UITableViewDelegate{
         super.viewWillAppear(animated)
         
         activeStocks = (stock.activeStocks?.allObjects as? [ActiveStock])!
+        quantityLabel.text = "\(stock.quantity)"
+        worthLabel.text = "\(stock.worth)"
+        earningsLabel.text = "\(stock.earnings)"
+        tableView.reloadData()
     }
 }
 
@@ -101,7 +113,7 @@ extension StockDetailViewController: UITableViewDelegate{
 extension StockDetailViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Bought History"
+        return "Traiding History"
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
