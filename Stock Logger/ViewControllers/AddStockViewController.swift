@@ -49,7 +49,7 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
         
         
         
-        let activeStock = ActiveStock(using: coreDataStack.managedContext)
+        let activeStock = ActiveStock(context: coreDataStack.managedContext)
         
         
         activeStock.boughtPrice = price
@@ -57,7 +57,7 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
         
         switch inCreaseDeCrease {
         case 0: // Add new Stock
-            let stock = Stock(using: coreDataStack.managedContext)
+            let stock = Stock(context: coreDataStack.managedContext)
             
             stock.symbol = symbol
             stock.companyName = companyName
