@@ -11,7 +11,7 @@ import CoreData
 
 class ViewController: UIViewController {
     //MARK: - Properties
-    var coreDataStack = CoreDataStack(modelName: "StockModel")
+    static var coreDataStack = CoreDataStack(modelName: "StockModel")
     var stocks = [Stock]()
     var fetchedResultsController: NSFetchedResultsController<Stock>!
     
@@ -41,7 +41,7 @@ class ViewController: UIViewController {
         let request = Stock.fetchRequest()
         
         do {
-            stocks = try coreDataStack.managedContext.fetch(request)
+            stocks = try ViewController.coreDataStack.managedContext.fetch(request)
 
         } catch {
             print("Fetching Error!!!")
@@ -80,8 +80,8 @@ extension ViewController: UITableViewDelegate{
         switch editingStyle{
         case .delete:
             let selected = stocks[indexPath.row]
-            coreDataStack.managedContext.delete(selected)
-            coreDataStack.saveContext()
+            ViewController.coreDataStack.managedContext.delete(selected)
+            ViewController.coreDataStack.saveContext()
             stocks.remove(at: indexPath.row)
             stockListTableView.deleteRows(at: [indexPath], with: .automatic)
         default:
@@ -110,7 +110,7 @@ extension ViewController:UITableViewDataSource{
         cell.symbolLabel.text = stock.symbol
         cell.companyNameLabel.text = stock.companyName
         cell.priceLabel.text = "\(stock.price)"
-        cell.erningsLabel.text = "\(round(stock.earnings * 10000) / 10000)"
+        cell.erningsLabel.text = "\(stock.earnings)"
         
 
 

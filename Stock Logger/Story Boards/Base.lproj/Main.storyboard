@@ -264,7 +264,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="200"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n26-gX-ey0">
-                                        <rect key="frame" x="20" y="20" width="374" height="30"/>
+                                        <rect key="frame" x="20" y="5" width="374" height="30"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -276,13 +276,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eaa-hX-vHG">
-                                        <rect key="frame" x="148.5" y="91" width="46" height="23"/>
+                                        <rect key="frame" x="148.5" y="73" width="46" height="23"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IzR-Gc-ys2" customClass="CurrencyLabel" customModule="Stock_Logger" customModuleProvider="target">
-                                        <rect key="frame" x="148.5" y="124" width="46" height="23"/>
+                                        <rect key="frame" x="148.5" y="129" width="46" height="23"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -293,14 +293,26 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total in Stock:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qjy-Ax-o0P">
-                                        <rect key="frame" x="20" y="91" width="118.5" height="23"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Price:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fpX-KW-AxE">
+                                        <rect key="frame" x="20" y="129" width="120.5" height="23"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Price:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fpX-KW-AxE">
-                                        <rect key="frame" x="20" y="124" width="120.5" height="23"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total in Stock:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qjy-Ax-o0P">
+                                        <rect key="frame" x="20" y="73" width="118.5" height="23"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Worth:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ukd-if-jeL">
+                                        <rect key="frame" x="20" y="101" width="120.5" height="23"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g1a-Aj-mgf" customClass="CurrencyLabel" customModule="Stock_Logger" customModuleProvider="target">
+                                        <rect key="frame" x="148.5" y="101" width="46" height="23"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -308,27 +320,33 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.44758087400000002" green="0.88023477790000004" blue="0.8799713254" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstItem="g1a-Aj-mgf" firstAttribute="leading" secondItem="Eaa-hX-vHG" secondAttribute="leading" id="14u-jh-4gh"/>
                                     <constraint firstItem="IzR-Gc-ys2" firstAttribute="top" secondItem="fpX-KW-AxE" secondAttribute="top" id="1yb-sr-hBg"/>
                                     <constraint firstAttribute="trailing" secondItem="n26-gX-ey0" secondAttribute="trailing" constant="20" id="2jz-q8-8Nl"/>
                                     <constraint firstItem="djP-Il-rvT" firstAttribute="top" secondItem="fak-s7-zbE" secondAttribute="top" id="3BT-7N-RGB"/>
                                     <constraint firstItem="Eaa-hX-vHG" firstAttribute="top" secondItem="Qjy-Ax-o0P" secondAttribute="top" id="67K-we-fQF"/>
                                     <constraint firstItem="fak-s7-zbE" firstAttribute="leading" secondItem="fpX-KW-AxE" secondAttribute="leading" id="DIz-P0-4nN"/>
                                     <constraint firstItem="n26-gX-ey0" firstAttribute="leading" secondItem="1Cf-TQ-IEy" secondAttribute="leading" constant="20" id="GGU-QS-MD1"/>
+                                    <constraint firstItem="fak-s7-zbE" firstAttribute="leading" secondItem="ukd-if-jeL" secondAttribute="leading" id="Ivu-F6-0F1"/>
                                     <constraint firstItem="djP-Il-rvT" firstAttribute="leading" secondItem="Eaa-hX-vHG" secondAttribute="leading" id="JtF-5F-ZkV"/>
-                                    <constraint firstItem="fpX-KW-AxE" firstAttribute="top" secondItem="Qjy-Ax-o0P" secondAttribute="bottom" constant="10" id="OJH-n3-tgB"/>
+                                    <constraint firstItem="g1a-Aj-mgf" firstAttribute="top" secondItem="ukd-if-jeL" secondAttribute="top" id="M67-eW-N9d"/>
                                     <constraint firstAttribute="height" constant="200" id="QJe-HT-gTd"/>
-                                    <constraint firstItem="n26-gX-ey0" firstAttribute="top" secondItem="1Cf-TQ-IEy" secondAttribute="top" constant="20" id="Tob-9l-Cpu"/>
+                                    <constraint firstItem="fpX-KW-AxE" firstAttribute="top" secondItem="ukd-if-jeL" secondAttribute="bottom" constant="5" id="REC-mO-9Sb"/>
+                                    <constraint firstItem="n26-gX-ey0" firstAttribute="top" secondItem="1Cf-TQ-IEy" secondAttribute="top" constant="5" id="Tob-9l-Cpu"/>
                                     <constraint firstAttribute="bottom" secondItem="fak-s7-zbE" secondAttribute="bottom" constant="20" id="Y8Y-ot-uIw"/>
                                     <constraint firstItem="Qjy-Ax-o0P" firstAttribute="leading" secondItem="n26-gX-ey0" secondAttribute="leading" id="ZbM-sY-m16"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Eaa-hX-vHG" secondAttribute="trailing" constant="20" symbolic="YES" id="daU-xH-B3n"/>
-                                    <constraint firstItem="fak-s7-zbE" firstAttribute="top" secondItem="fpX-KW-AxE" secondAttribute="bottom" constant="10" id="djb-wt-NOK"/>
+                                    <constraint firstItem="fak-s7-zbE" firstAttribute="top" secondItem="fpX-KW-AxE" secondAttribute="bottom" constant="5" id="djb-wt-NOK"/>
                                     <constraint firstItem="IzR-Gc-ys2" firstAttribute="leading" secondItem="Eaa-hX-vHG" secondAttribute="leading" id="eGP-UN-cAJ"/>
                                     <constraint firstItem="djP-Il-rvT" firstAttribute="leading" secondItem="fak-s7-zbE" secondAttribute="trailing" constant="8" symbolic="YES" id="fXa-jG-oJm"/>
                                     <constraint firstItem="IzR-Gc-ys2" firstAttribute="leading" secondItem="fpX-KW-AxE" secondAttribute="trailing" constant="8" symbolic="YES" id="j4J-78-I3s"/>
                                     <constraint firstItem="Eaa-hX-vHG" firstAttribute="leading" secondItem="Qjy-Ax-o0P" secondAttribute="trailing" constant="10" id="jzr-XM-vCG"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="djP-Il-rvT" secondAttribute="trailing" constant="20" symbolic="YES" id="nZt-L4-t02"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="IzR-Gc-ys2" secondAttribute="trailing" constant="20" symbolic="YES" id="nif-1n-AWE"/>
+                                    <constraint firstItem="g1a-Aj-mgf" firstAttribute="leading" secondItem="ukd-if-jeL" secondAttribute="trailing" constant="8" symbolic="YES" id="ntJ-sG-LYT"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="g1a-Aj-mgf" secondAttribute="trailing" constant="20" symbolic="YES" id="oLr-KL-qZY"/>
                                     <constraint firstItem="fpX-KW-AxE" firstAttribute="leading" secondItem="Qjy-Ax-o0P" secondAttribute="leading" id="qTG-87-C8O"/>
+                                    <constraint firstItem="ukd-if-jeL" firstAttribute="top" secondItem="Qjy-Ax-o0P" secondAttribute="bottom" constant="5" id="wJx-EN-oPM"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="1XO-M5-GJn">
@@ -430,6 +448,7 @@
                         <outlet property="priceLabel" destination="IzR-Gc-ys2" id="8Db-FP-YY6"/>
                         <outlet property="quantityLabel" destination="Eaa-hX-vHG" id="x9h-nR-EKv"/>
                         <outlet property="tableView" destination="1XO-M5-GJn" id="3ue-2b-mNy"/>
+                        <outlet property="worthLabel" destination="g1a-Aj-mgf" id="wLM-xR-eZn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5ol-nC-Eyf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

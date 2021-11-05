@@ -10,11 +10,12 @@ import CoreData
 
 class AddStockViewController: UITableViewController, UITextFieldDelegate {
     //MARK: - Properties
-    var coreDataStack = CoreDataStack(modelName: "StockModel")
+    var coreDataStack = ViewController.coreDataStack
     var stocks = [Stock]()
-    var fetchedResultsController: NSFetchedResultsController<Stock>!
+    //var fetchedResultsController: NSFetchedResultsController<Stock>!
     
-    var stock: Stock!
+    var cName: String!
+    var cSymbol: String!
     var inCreaseDeCrease = 0
     
     
@@ -34,43 +35,104 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
         //.resignFirstResponder()
         
         // To check wich field is empty, used sperated guard statements.
-        guard let symbol = isEmpty(symbolTextField),
-           let companyName = isEmpty(companyNameTextField),
-           let price = isDouble(priceTextField),
-           let quantityDouble = isDouble(quantityTextField) else{
+        guard
+            let symbol = isEmpty(symbolTextField),
+            let companyName = isEmpty(companyNameTextField),
+            let price = isDouble(priceTextField),
+            let quantityDouble = isDouble(quantityTextField)
+        else{
             return
         }
         
         // got quantity as double when check it. Convert to Int know.
-        let quantity = Int16(quantityDouble)
+        var quantity = Int16(quantityDouble)
         
         
-        let stock = Stock(context: coreDataStack.managedContext)
-        let activeStock = ActiveStock(context: coreDataStack.managedContext)
-        let worth = price  + 2.0 * 5.59 / Double(quantity)
+        
+        let activeStock = ActiveStock(using: coreDataStack.managedContext)
+        
+        
+        activeStock.boughtPrice = price
+        activeStock.boughtDate = boughtDatePicker.date
+        
+        switch inCreaseDeCrease {
+        case 0: // Add new Stock
+            let stock = Stock(using: coreDataStack.managedContext)
+            
+            stock.symbol = symbol
+            stock.companyName = companyName
+            let worth = price  + 2.0 * 5.95 / Double(quantity)
+            
+            
+            stock.quantity = quantity
+            
+            stock.price = price
+            stock.worth = worth
+            
+            
+            activeStock.quantity = quantity
+            activeStock.worth = worth
+            activeStock.stock = stock
+            stock.addToActiveStocks(activeStock)
+            stocks.append(stock)
+            
+        default: // Increase or Decrease Stock
+
+            
+            if let stock = stocks.first(where: {$0.symbol == symbol}) {
+                
+                quantity = Int16(inCreaseDeCrease) * quantity
+                let totalQuantity = quantity + stock.quantity
+
+                let activeStockWorth = price + 5.95 / Double(quantity)
+                activeStock.worth = activeStockWorth
+                activeStock.quantity = quantity
+
+                activeStock.stock = stock
+                stock.addToActiveStocks(activeStock)
+
+                // calculate worth of whole stock
+                var worth = 0.0
+
+                let activeStocks = (stock.activeStocks?.allObjects as? [ActiveStock])!
+                for active in activeStocks {
+                    let weight = active.worth * Double(active.quantity) / Double(totalQuantity)
+                    print("Weight is \(weight)")
+                    worth = worth + weight
+                }
+
+                stock.worth = worth
+                stock.quantity = totalQuantity
+                stock.earnings = (stock.price - stock.worth) * Double(stock.quantity)
+
+
+                //print(self.stocks)
+            } else {
+                print("Not Found!!!")
+            }
+            
+            
+            break
+        }
+        
+
+        coreDataStack.saveContext()
 
         
-        stock.symbol = symbol
-        stock.quantity = quantity
-        stock.companyName = companyName
-        stock.price = price
-        stock.worth = worth
-         
         
-        activeStock.quantity = quantity
-        activeStock.boughtDate = boughtDatePicker.date
-        activeStock.boughtPrice = price
-        activeStock.worth = worth
-        activeStock.stock = stock
-        stock.addToActiveStocks(activeStock)
-        
-        
-        
-        coreDataStack.saveContext()
-        stocks.append(stock)
-        
-        
+//        for stock in stocks {
+//            print(stock.companyName!)
+//        }
         navigationController?.popViewController(animated: true)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? StockDetailViewController {
+            if let stock = stocks.first(where: {$0.symbol == cSymbol}){
+                vc.stock = stock
+            }
+        }
+        
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -89,9 +151,9 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
         
         
         if inCreaseDeCrease != 0 {
-            symbolTextField.text = stock.symbol!
+            symbolTextField.text = cSymbol
             symbolTextField.isEnabled = false
-            companyNameTextField.text = stock.companyName!
+            companyNameTextField.text = cName
             companyNameTextField.isEnabled = false
             
             
@@ -99,6 +161,8 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
 
         //Load
         loadSavedData()
+        
+
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -176,6 +240,7 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
         
         do {
             stocks = try coreDataStack.managedContext.fetch(request)
+            //stocks =
             
             //TODO: - Delete following sentence
 //            stocks.map({
@@ -237,14 +302,16 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
 }
 
 //MARK: - Fetch Reqeust Delegate
-extension AddStockViewController: NSFetchedResultsControllerDelegate{
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        switch type {
-        case .delete:
-            print(tableView.numberOfRows(inSection: 0))
-            
-        default:
-            break
-        }
-    }
-}
+//extension AddStockViewController: NSFetchedResultsControllerDelegate{
+//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+//        switch type {
+//        case .delete:
+//            print(tableView.numberOfRows(inSection: 0))
+//
+//        default:
+//            break
+//        }
+//    }
+//}
+
+
