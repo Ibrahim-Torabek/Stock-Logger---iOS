@@ -47,17 +47,6 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
             return
         }
         
-        if inCreaseDeCrease == 2 {
-            if let stock = stocks.first(where: {$0.symbol == symbol}) {
-                stock.companyName = companyName
-                stock.symbol = symbol
-                
-                coreDataStack.saveContext()
-                
-            }
-
-            return
-        }
         
         // got quantity as double when check it. Convert to Int know.
         var quantity = Int16(quantityDouble)
@@ -90,6 +79,13 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
             activeStock.stock = stock
             stock.addToActiveStocks(activeStock)
             stocks.append(stock)
+            
+        case 2:
+            // Edit symbol and company name
+            if let stock = stocks.first(where: {$0.symbol == symbol}) {
+                stock.companyName = companyName
+                stock.symbol = symbol
+            }
             
         default: // Increase or Decrease Stock
 
@@ -139,6 +135,8 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
 //            print(stock.companyName!)
 //        }
         navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true, completion: nil)
+        return
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
