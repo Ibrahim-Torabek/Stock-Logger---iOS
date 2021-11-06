@@ -14,8 +14,11 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
     var stocks = [Stock]()
     //var fetchedResultsController: NSFetchedResultsController<Stock>!
     
-    var cName: String!
-    var cSymbol: String!
+    var stock: Stock!
+    // inCreaseDeCrease = 0 create new
+    // inCreaseDeCrease = 1 Increase
+    // inCreaseDeCrease = -1 Decrease
+    // inCreaseDeCrease = 2 Edit symbol and company name
     var inCreaseDeCrease = 0
     
     
@@ -41,6 +44,18 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
             let price = isDouble(priceTextField),
             let quantityDouble = isDouble(quantityTextField)
         else{
+            return
+        }
+        
+        if inCreaseDeCrease == 2 {
+            if let stock = stocks.first(where: {$0.symbol == symbol}) {
+                stock.companyName = companyName
+                stock.symbol = symbol
+                
+                coreDataStack.saveContext()
+                
+            }
+
             return
         }
         
@@ -128,7 +143,7 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? StockDetailViewController {
-            if let stock = stocks.first(where: {$0.symbol == cSymbol}){
+            if let stock = stocks.first(where: {$0.symbol == self.stock.symbol}){
                 vc.stock = stock
             }
         }
@@ -149,13 +164,20 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
         priceTextField.delegate = self
         quantityTextField.delegate = self
         
-        
-        if inCreaseDeCrease != 0 {
-            symbolTextField.text = cSymbol
+        if inCreaseDeCrease == 2 {
+            // If edit mode, just edit symbol and company name
+            symbolTextField.text = stock.symbol
+            companyNameTextField.text = stock.companyName
+            priceTextField.text = "\(stock.price)"
+            priceTextField.isEnabled = false
+            quantityTextField.text = "\(stock.quantity)"
+            quantityTextField.isEnabled = false
+        } else if inCreaseDeCrease != 0 {
+            // if increase or decrease, just put new price and quantity
+            symbolTextField.text = stock.symbol
             symbolTextField.isEnabled = false
-            companyNameTextField.text = cName
+            companyNameTextField.text = stock.companyName
             companyNameTextField.isEnabled = false
-            
             
         }
 
