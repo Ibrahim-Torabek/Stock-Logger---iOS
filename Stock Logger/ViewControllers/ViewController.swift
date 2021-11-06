@@ -117,6 +117,8 @@ extension ViewController: UITableViewDelegate{
         return UISwipeActionsConfiguration(actions: [action])
     }
     
+    
+    
     //MARK: - Delete Action
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action = UIContextualAction(style: .normal, title: "Delete", handler: {
