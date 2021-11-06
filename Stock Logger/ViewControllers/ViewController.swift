@@ -17,9 +17,11 @@ class ViewController: UIViewController {
     
     var stocksDetail = [StockDetail?](repeating: nil, count: 20)
     
+    var refreshControl = UIRefreshControl()
+    
     
     //MARK: - Outlets
-    @IBOutlet weak var stockListTableView: UITableView!
+    @IBOutlet weak var tableView: UITableView!
     
     
     //MARK: - View Did Load
@@ -27,11 +29,12 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        stockListTableView.delegate = self
-        stockListTableView.dataSource = self
+        tableView.delegate = self
+        tableView.dataSource = self
         
-        //loadStockData()
-        
+        refreshControl.attributedTitle = NSAttributedString(string: "Refreshing the table")
+        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: UIControl.Event.valueChanged)
+        tableView.addSubview(refreshControl)
         
     }
     
@@ -54,11 +57,18 @@ class ViewController: UIViewController {
             
         }
         
-        stockListTableView.reloadData()
+        tableView.reloadData()
         
     }
     
+    
+    //MARK: - Objcs
+    @objc func refresh(_ sender: AnyObject){
 
+        loadStockData()
+        refreshControl.endRefreshing()
+    }
+    
 
 }
 
@@ -83,7 +93,7 @@ extension ViewController: UITableViewDelegate{
             ViewController.coreDataStack.managedContext.delete(selectedStock)
             ViewController.coreDataStack.saveContext()
             stocks.remove(at: indexPath.row)
-            stockListTableView.deleteRows(at: [indexPath], with: .automatic)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
             
             
         default:
@@ -128,7 +138,7 @@ extension ViewController: UITableViewDelegate{
             ViewController.coreDataStack.managedContext.delete(selectedStock)
             ViewController.coreDataStack.saveContext()
             self.stocks.remove(at: indexPath.row)
-            self.stockListTableView.deleteRows(at: [indexPath], with: .automatic)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
             
             perormed(true)
         })
@@ -173,7 +183,7 @@ extension ViewController:UITableViewDataSource{
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let index = stockListTableView.indexPathForSelectedRow else { return }
+        guard let index = tableView.indexPathForSelectedRow else { return }
         
         let vc = segue.destination as! StockDetailViewController
         vc.stock = stocks[index.row]
@@ -232,7 +242,7 @@ extension ViewController:UITableViewDataSource{
                         stock.price = Double(newStock.price!)!
                         
                         stock.earnings = (stock.price - stock.worth) * Double(stock.quantity)
-                        self.stockListTableView.reloadData()
+                        self.tableView.reloadData()
                     }
                 }
             }
@@ -276,7 +286,7 @@ extension ViewController:UITableViewDataSource{
                 DispatchQueue.main.async {
                     if let stock = stockDetail {
                         cell.priceLabel.text = stock.price
-                        self.stockListTableView.reloadData()
+                        self.tableView.reloadData()
                     }
                 }
             }
@@ -321,7 +331,7 @@ extension ViewController:UITableViewDataSource{
                 DispatchQueue.main.async {
                     if let stock = stockDetail {
                         self.stocksDetail[index] = stock
-                        self.stockListTableView.reloadData()
+                        self.tableView.reloadData()
                     }
                 }
             }
