@@ -38,10 +38,9 @@ class StockDetailViewController: UIViewController {
         guard let button = sender as? UIButton else { return }
         
         let vc = segue.destination as? AddStockViewController
-        //vc?.stock = stock
+        vc?.stock = stock
 
-        vc?.cName = stock.companyName!
-        vc?.cSymbol = stock.symbol!
+//        vc?.stock =
         
         switch button {
         case inCreaseButton:

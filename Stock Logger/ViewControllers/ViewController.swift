@@ -91,9 +91,20 @@ extension ViewController: UITableViewDelegate{
         }
     }
     
+    //MARK: - Edit Action
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action = UIContextualAction(style: .normal, title: "Edit", handler: {
             action, view, perormed in
+            
+
+            let stoyboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            let vc = stoyboard.instantiateViewController(identifier: "AddEditStock") as! AddStockViewController
+            
+            vc.stock = self.stocks[indexPath.row]
+            vc.inCreaseDeCrease = 2 //Edit
+            self.present(vc, animated: true, completion: nil)
+            
             perormed(true)
             print(indexPath.row)
         })
@@ -101,9 +112,12 @@ extension ViewController: UITableViewDelegate{
         action.backgroundColor = UIColor.systemBlue
         action.image = UIImage(systemName: "square.and.pencil")
         
+
+        
         return UISwipeActionsConfiguration(actions: [action])
     }
     
+    //MARK: - Delete Action
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action = UIContextualAction(style: .normal, title: "Delete", handler: {
             action, view, perormed in
@@ -115,7 +129,6 @@ extension ViewController: UITableViewDelegate{
             self.stockListTableView.deleteRows(at: [indexPath], with: .automatic)
             
             perormed(true)
-            print(indexPath.row)
         })
         
         action.backgroundColor = UIColor.systemRed
