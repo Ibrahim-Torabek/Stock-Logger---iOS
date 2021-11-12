@@ -62,6 +62,41 @@ class ViewController: UIViewController {
     }
     
     
+    //MARK: - Sold Stock Function
+    func soldStock(sold stock: Stock, at soldPrice: Double, from indexPath: IndexPath){
+        
+        do {
+            var soldStocks = try ViewController.coreDataStack.managedContext.fetch(SoldStock.fetchRequest())
+            
+            let sold = SoldStock(context: ViewController.coreDataStack.managedContext)
+            
+            sold.symbol = stock.symbol
+            sold.companyName = stock.companyName
+            sold.soldPrice = soldPrice
+            sold.earnings = (stock.worth - soldPrice) * Double(stock.quantity)
+            sold.soldDate = Date()
+            sold.quantity = stock.quantity
+            
+            soldStocks.append(sold)
+            
+            ViewController.coreDataStack.saveContext()
+            
+            deleteStok(delete: stock, at: indexPath)
+            print(soldStocks)
+        } catch {
+            print("Fatching sold stocks failed")
+        }
+    }
+    
+    //MARK: - Delete Stock Function
+    func deleteStok(delete stock: Stock, at indexPath: IndexPath){
+        ViewController.coreDataStack.managedContext.delete(stock)
+        ViewController.coreDataStack.saveContext()
+        self.stocks.remove(at: indexPath.row)
+        self.tableView.deleteRows(at: [indexPath], with: .automatic)
+    }
+    
+    
     //MARK: - Objcs
     @objc func refresh(_ sender: AnyObject){
 
@@ -129,24 +164,77 @@ extension ViewController: UITableViewDelegate{
     
     
     
-    //MARK: - Delete Action
+    //MARK: - Delete / Sold Actions
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let action = UIContextualAction(style: .normal, title: "Delete", handler: {
+        
+        let selectedStock = self.stocks[indexPath.row]
+        
+        let deleteAction = UIContextualAction(style: .normal, title: "Delete", handler: {
             action, view, perormed in
             
-            let selectedStock = self.stocks[indexPath.row]
-            ViewController.coreDataStack.managedContext.delete(selectedStock)
-            ViewController.coreDataStack.saveContext()
-            self.stocks.remove(at: indexPath.row)
-            self.tableView.deleteRows(at: [indexPath], with: .automatic)
             
-            perormed(true)
+            let ac = UIAlertController(title: "Warning!!!", message: "Are you sure to delete \(selectedStock.companyName!)?", preferredStyle: .alert)
+            
+            ac.addAction(UIAlertAction(title: "Yes", style: .default, handler: {_ in
+                DispatchQueue.main.async {
+                    self.deleteStok(delete: selectedStock, at: indexPath)
+                    perormed(true)
+                }
+            }))
+            
+            ac.addAction(UIAlertAction(title: "No", style: .default, handler: {_ in
+                perormed(false)
+            }))
+            
+            self.present(ac, animated: true)
+            
+            
+            
+            
         })
         
-        action.backgroundColor = UIColor.systemRed
-        action.image = UIImage(systemName: "trash.fill")
+        let soldAction = UIContextualAction(style: .normal, title: "Sold", handler: {
+            action, view, performed in
+            
+            let ac = UIAlertController(title: selectedStock.symbol, message: "Please enter the sold price?", preferredStyle: .alert)
+            
+            ac.addTextField(configurationHandler: {
+                textField in
+                
+                textField.placeholder = "123.32"
+                textField.keyboardType = .decimalPad
+            })
+            
+            
+            ac.addAction(UIAlertAction(title: "Sold", style: .default, handler: {
+                [weak self, weak ac] action in
+                guard let text = ac?.textFields?[0].text else { return }
+                
+                let soldPrice = (text as NSString).doubleValue
+                
+                self?.soldStock(sold: selectedStock, at: soldPrice, from: indexPath)
+                print(text)
+                performed(true)
+            }))
+            
+            ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            
+            self.present(ac, animated: true)
+            
+            
+        })
         
-        return UISwipeActionsConfiguration(actions: [action])
+        soldAction.backgroundColor = UIColor.systemCyan
+        soldAction.image = UIImage(named: "Sold-White")
+        
+        
+        
+        deleteAction.backgroundColor = UIColor.systemRed
+        deleteAction.image = UIImage(named: "Delete")
+        
+        let config = UISwipeActionsConfiguration(actions: [soldAction ,deleteAction])
+        config.performsFirstActionWithFullSwipe = false
+        return config
     }
 }
 
@@ -175,12 +263,14 @@ extension ViewController:UITableViewDataSource{
 
 
         // TODO: - Change image according to the earnings
-        let image = stock.earnings >= 0 ? UIImage(named: "High-Icon"): UIImage(named: "Low-Icon")
+        let image = stock.earnings >= 0 ? UIImage(named: "High"): UIImage(named: "Low")
         
         cell.highLowImage.image = image
         
         return cell;
     }
+    
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let index = tableView.indexPathForSelectedRow else { return }
@@ -199,8 +289,6 @@ extension ViewController:UITableViewDataSource{
         urlString = urlString.appending("function=GLOBAL_QUOTE&")
         urlString = urlString.appending("symbol=\(cleanURL)&")
         urlString = urlString.appending("apikey=WMHZQM8S5LZ9EB4W")
-        
-        //print(urlString)
         
         
         return URL(string: urlString)
@@ -233,8 +321,8 @@ extension ViewController:UITableViewDataSource{
                     stockDetail = donwloadGlobalquote.stockDetail
                     
                     
-                } catch let error {
-                    print("Problem decoding: \(error)")
+                } catch  {
+                    print("Only can fetch 5 stocks per minute due to free API key.")
                 }
                 
                 DispatchQueue.main.async {
@@ -253,94 +341,6 @@ extension ViewController:UITableViewDataSource{
         stockTask.resume()
     }
     
-    func fetchStock(from url: URL, to cell: StockCell){
-        
-        
-        let stockTask = URLSession.shared.dataTask(with: url){
-            data, response, error in
-            
-            var stockDetail: StockDetail?
-            
-            if let error = error {
-                print("Failed to fetch: \(error.localizedDescription)")
-            } else {
-                do {
-                    guard let someData = data else { return }
-                    
-                    
-                    let jSonDecoder = JSONDecoder()
-                    
-                    let donwloadGlobalquote = try jSonDecoder.decode(GlobalQuote.self, from: someData)
-                    
-                    if let symbol = donwloadGlobalquote.stockDetail.price {
-                        print(symbol)
-                    }
-                    
-                    stockDetail = donwloadGlobalquote.stockDetail
-                    
-                    
-                } catch let error {
-                    print("Problem decoding: \(error)")
-                }
-                
-                DispatchQueue.main.async {
-                    if let stock = stockDetail {
-                        cell.priceLabel.text = stock.price
-                        self.tableView.reloadData()
-                    }
-                }
-            }
-            
-            
-        }
-        
-        stockTask.resume()
-    }
-    
-    
-    func fetchStock(from url: URL, into index: Int){
-        
-        
-        let stockTask = URLSession.shared.dataTask(with: url){
-            data, response, error in
-            
-            var stockDetail: StockDetail?
-            
-            if let error = error {
-                print("Failed to fetch: \(error.localizedDescription)")
-            } else {
-                do {
-                    guard let someData = data else { return }
-                    
-                    
-                    let jSonDecoder = JSONDecoder()
-                    
-                    let donwloadGlobalquote = try jSonDecoder.decode(GlobalQuote.self, from: someData)
-                    
-                    if let symbol = donwloadGlobalquote.stockDetail.price {
-                        print(symbol)
-                    }
-                    
-                    stockDetail = donwloadGlobalquote.stockDetail
-                    
-                    
-                } catch let error {
-                    print("Problem decoding: \(error)")
-                }
-                
-                DispatchQueue.main.async {
-                    if let stock = stockDetail {
-                        self.stocksDetail[index] = stock
-                        self.tableView.reloadData()
-                    }
-                }
-            }
-            
-            
-        }
-        
-        stockTask.resume()
-    }
     
 }
 
