@@ -8,11 +8,12 @@
         <relationship name="stock" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Stock" inverseName="activeStocks" inverseEntity="Stock"/>
     </entity>
     <entity name="SoldStock" representedClassName="SoldStock" syncable="YES" codeGenerationType="class">
-        <attribute name="earnings" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="quantity" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="soldDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="soldPrice" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="symbol" optional="YES" attributeType="String"/>
+        <attribute name="companyName" attributeType="String"/>
+        <attribute name="earnings" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="quantity" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="soldDate" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="soldPrice" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="symbol" attributeType="String"/>
     </entity>
     <entity name="Stock" representedClassName="Stock" syncable="YES" codeGenerationType="class">
         <attribute name="companyName" attributeType="String"/>
@@ -28,7 +29,7 @@
     </entity>
     <elements>
         <element name="ActiveStock" positionX="-54" positionY="27" width="128" height="104"/>
-        <element name="SoldStock" positionX="-36" positionY="72" width="128" height="104"/>
+        <element name="SoldStock" positionX="-36" positionY="72" width="128" height="119"/>
         <element name="Stock" positionX="-63" positionY="-18" width="128" height="134"/>
     </elements>
 </model>

@@ -9,6 +9,7 @@ import Foundation
 
 struct GlobalQuote: Codable {
     var stockDetail: StockDetail
+    var note: String?
     
     enum CodingKeys: String, CodingKey{
         case stockDetail = "Global Quote"
