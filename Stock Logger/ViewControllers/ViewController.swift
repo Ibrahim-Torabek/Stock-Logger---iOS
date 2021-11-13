@@ -247,7 +247,7 @@ extension ViewController: UITableViewDelegate{
                 let soldPrice = (text as NSString).doubleValue
                 
                 self?.soldStock(sold: selectedStock, at: soldPrice, from: indexPath)
-                print(text)
+                self?.calculateEarnings()
                 performed(true)
             }))
             
