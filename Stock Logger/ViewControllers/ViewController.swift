@@ -13,6 +13,8 @@ class ViewController: UIViewController {
     //MARK: - Properties
     static var coreDataStack = CoreDataStack(modelName: "StockModel")
     var stocks = [Stock]()
+    var soldStocks = [SoldStock]()
+    
     var fetchedResultsController: NSFetchedResultsController<Stock>!
     
     var stocksDetail = [StockDetail?](repeating: nil, count: 20)
@@ -22,6 +24,11 @@ class ViewController: UIViewController {
     
     //MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet weak var totalStockLabel: UILabel!
+    @IBOutlet weak var activeEarningsLabel: CurrencyLabel!
+    @IBOutlet weak var soldEarningsLabel: CurrencyLabel!
+    @IBOutlet weak var totalEarningsLabel: CurrencyLabel!
     
     
     //MARK: - View Did Load
@@ -40,11 +47,10 @@ class ViewController: UIViewController {
     
     //MARK: - Functions
     func loadStockData(){
-                
-        let request = Stock.fetchRequest()
         
         do {
-            stocks = try ViewController.coreDataStack.managedContext.fetch(request)
+            stocks = try ViewController.coreDataStack.managedContext.fetch(Stock.fetchRequest())
+            soldStocks = try ViewController.coreDataStack.managedContext.fetch(SoldStock.fetchRequest())
 
         } catch {
             print("Fetching Error!!!")
@@ -59,33 +65,51 @@ class ViewController: UIViewController {
         
         tableView.reloadData()
         
+        calculateEarnings()
+        
+    }
+    
+    func calculateEarnings(){
+        var activeEarnings = 0.0
+        var soldStockEarnings = 0.0
+        
+        for stock in stocks {
+            activeEarnings += stock.earnings
+        }
+        
+        for stock in soldStocks {
+            soldStockEarnings += stock.earnings
+        }
+        
+        activeEarningsLabel.text = "\(activeEarnings)"
+        soldEarningsLabel.text = "\(soldStockEarnings)"
+        
+        totalEarningsLabel.text = "\(activeEarnings + soldStockEarnings)"
+        
     }
     
     
     //MARK: - Sold Stock Function
     func soldStock(sold stock: Stock, at soldPrice: Double, from indexPath: IndexPath){
         
-        do {
-            var soldStocks = try ViewController.coreDataStack.managedContext.fetch(SoldStock.fetchRequest())
             
-            let sold = SoldStock(context: ViewController.coreDataStack.managedContext)
-            
-            sold.symbol = stock.symbol
-            sold.companyName = stock.companyName
-            sold.soldPrice = soldPrice
-            sold.earnings = (stock.worth - soldPrice) * Double(stock.quantity)
-            sold.soldDate = Date()
-            sold.quantity = stock.quantity
-            
-            soldStocks.append(sold)
-            
-            ViewController.coreDataStack.saveContext()
-            
-            deleteStok(delete: stock, at: indexPath)
-            print(soldStocks)
-        } catch {
-            print("Fatching sold stocks failed")
-        }
+        let sold = SoldStock(context: ViewController.coreDataStack.managedContext)
+        
+        sold.symbol = stock.symbol
+        sold.companyName = stock.companyName
+        sold.soldPrice = soldPrice
+        sold.earnings = (soldPrice - stock.worth) * Double(stock.quantity)
+        sold.soldDate = Date()
+        sold.quantity = stock.quantity
+        
+        soldStocks.append(sold)
+        
+        ViewController.coreDataStack.saveContext()
+        
+        deleteStok(delete: stock, at: indexPath)
+        
+        calculateEarnings()
+
     }
     
     //MARK: - Delete Stock Function
