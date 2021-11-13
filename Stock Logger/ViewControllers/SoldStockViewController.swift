@@ -11,9 +11,11 @@ class SoldStockViewController: UIViewController {
     //MARK: - Properties
     var coreDataStack = ViewController.coreDataStack
     var soldStocks = [SoldStock]()
+    var total = 0.0
 
     //MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var totalEarnings: CurrencyLabel!
     
     
     //MARK: - View Did Load
@@ -44,9 +46,23 @@ class SoldStockViewController: UIViewController {
             print("Fetching Error!!!")
         }
         
+        calculateTotalEarnings()
+        
         
         tableView.reloadData()
         
+    }
+    
+    
+    
+    func calculateTotalEarnings(){
+        
+        
+        for stock in soldStocks {
+            total += stock.earnings
+        }
+        
+        totalEarnings.text = "\(total)"
     }
     
 
@@ -64,6 +80,10 @@ class SoldStockViewController: UIViewController {
 
 
 extension SoldStockViewController: UITableViewDataSource{
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Sold Stocks' List"
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return soldStocks.count
     }
