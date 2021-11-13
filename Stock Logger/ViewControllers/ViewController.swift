@@ -45,27 +45,39 @@ class ViewController: UIViewController {
         
     }
     
+    
     //MARK: - Functions
     func loadStockData(){
         
-        do {
-            stocks = try ViewController.coreDataStack.managedContext.fetch(Stock.fetchRequest())
-            soldStocks = try ViewController.coreDataStack.managedContext.fetch(SoldStock.fetchRequest())
+        DispatchQueue.global().async{
+            [weak self] in
+            
+            do {
+                self?.stocks = try ViewController.coreDataStack.managedContext.fetch(Stock.fetchRequest())
+                self?.soldStocks = try ViewController.coreDataStack.managedContext.fetch(SoldStock.fetchRequest())
 
-        } catch {
-            print("Fetching Error!!!")
-        }
-        
-        for stock in stocks {
-            if let url = createStockUrl(for: stock.symbol!) {
-                fetchStock(from: url, to: stock)
+            } catch {
+                print("Fetching Error!!!")
             }
             
+            DispatchQueue.main.async {
+                [unowned self] in
+                
+                for stock in self!.stocks {
+                    if let url = self?.createStockUrl(for: stock.symbol!) {
+                        self?.fetchStock(from: url, to: stock)
+                    }
+                    
+                }
+                
+                self?.calculateEarnings()
+                
+                self?.tableView.reloadData()
+            }
         }
+
         
-        tableView.reloadData()
         
-        calculateEarnings()
         
     }
     
@@ -107,8 +119,7 @@ class ViewController: UIViewController {
         ViewController.coreDataStack.saveContext()
         
         deleteStok(delete: stock, at: indexPath)
-        
-        calculateEarnings()
+
 
     }
     
@@ -202,6 +213,7 @@ extension ViewController: UITableViewDelegate{
             ac.addAction(UIAlertAction(title: "Yes", style: .default, handler: {_ in
                 DispatchQueue.main.async {
                     self.deleteStok(delete: selectedStock, at: indexPath)
+                    self.calculateEarnings()
                     perormed(true)
                 }
             }))
@@ -211,8 +223,6 @@ extension ViewController: UITableViewDelegate{
             }))
             
             self.present(ac, animated: true)
-            
-            
             
             
         })
@@ -258,6 +268,8 @@ extension ViewController: UITableViewDelegate{
         
         let config = UISwipeActionsConfiguration(actions: [soldAction ,deleteAction])
         config.performsFirstActionWithFullSwipe = false
+        
+        
         return config
     }
 }
@@ -355,6 +367,7 @@ extension ViewController:UITableViewDataSource{
                         
                         stock.earnings = (stock.price - stock.worth) * Double(stock.quantity)
                         self.tableView.reloadData()
+                        self.calculateEarnings()
                     }
                 }
             }
