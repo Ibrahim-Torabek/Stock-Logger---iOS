@@ -14,6 +14,7 @@
 		00A2BEF4272C507400B1DBF5 /* CurrencyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A2BEF3272C507400B1DBF5 /* CurrencyLabel.swift */; };
 		00B11A18271A59BF00BFA504 /* StockModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 00B11A16271A59BF00BFA504 /* StockModel.xcdatamodeld */; };
 		00D39DAE2721055900A21104 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D39DAD2721055900A21104 /* CoreDataStack.swift */; };
+		00F0A2B2274080770090D336 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F0A2B1274080770090D336 /* SearchViewController.swift */; };
 		00FEBAE22701680600D10841 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FEBAE12701680600D10841 /* AppDelegate.swift */; };
 		00FEBAE42701680600D10841 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FEBAE32701680600D10841 /* SceneDelegate.swift */; };
 		00FEBAE62701680600D10841 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FEBAE52701680600D10841 /* ViewController.swift */; };
@@ -30,6 +31,7 @@
 		00A2BEF3272C507400B1DBF5 /* CurrencyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyLabel.swift; sourceTree = "<group>"; };
 		00B11A17271A59BF00BFA504 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		00D39DAD2721055900A21104 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		00F0A2B1274080770090D336 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		00FEBADE2701680600D10841 /* Stock Logger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Stock Logger.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		00FEBAE12701680600D10841 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		00FEBAE32701680600D10841 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -58,6 +60,7 @@
 				003D7A0B271D0B0F00C088D0 /* AddStockViewController.swift */,
 				00A2BEF1272C4D5C00B1DBF5 /* StockDetailViewController.swift */,
 				008443DE273B6CDF007A29BB /* SoldStockViewController.swift */,
+				00F0A2B1274080770090D336 /* SearchViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -184,6 +187,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00A2BEF2272C4D5C00B1DBF5 /* StockDetailViewController.swift in Sources */,
+				00F0A2B2274080770090D336 /* SearchViewController.swift in Sources */,
 				00D39DAE2721055900A21104 /* CoreDataStack.swift in Sources */,
 				00FEBAE62701680600D10841 /* ViewController.swift in Sources */,
 				00FEBAE22701680600D10841 /* AppDelegate.swift in Sources */,
