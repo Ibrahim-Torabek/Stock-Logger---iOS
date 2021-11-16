@@ -31,6 +31,7 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var isUsdSwitch: UISwitch!
     
 
+    //MARK: - Actions - Save Button
     @IBAction func save(_ sender: Any) {
         
         // Resign First Reponder
@@ -59,12 +60,14 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
         activeStock.boughtPrice = price
         activeStock.boughtDate = boughtDatePicker.date
         
+        
         switch inCreaseDeCrease {
         case 0: // Add new Stock
             let stock = Stock(context: coreDataStack.managedContext)
             
             stock.symbol = symbol
             stock.companyName = companyName
+            stock.isUSD = isUsdSwitch.isOn
             let worth = price  + 2.0 * 5.95 / Double(quantity)
             
             
@@ -139,6 +142,17 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
         return
     }
     
+    
+    @IBAction func refresh(_ sender: Any) {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "SearchStock") as! SearchViewController
+        vc.addStockViewController = self
+        present(vc, animated: true)
+    }
+    
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? StockDetailViewController {
             if let stock = stocks.first(where: {$0.symbol == self.stock.symbol}){
@@ -153,6 +167,7 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
     }
     
     
+    //MARK: - View Did Laod
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -178,6 +193,16 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
             companyNameTextField.isEnabled = false
             
         }
+        
+        
+        
+        // Add search button
+        let searchButton = UIButton(type: .custom)
+        searchButton.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
+        searchButton.addTarget(self, action: #selector(self.refresh), for: .touchUpInside)
+        
+        symbolTextField.rightViewMode = .always
+        symbolTextField.rightView = searchButton
 
         //Load
         loadSavedData()
@@ -190,6 +215,7 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
+    
 
     // MARK: - Table view data source
 
@@ -203,6 +229,10 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
         return 12
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        // Just for constraint warning
+        return 44.5
+    }
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)

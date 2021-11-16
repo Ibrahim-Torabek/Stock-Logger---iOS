@@ -18,6 +18,7 @@ class StockDetailViewController: UIViewController {
     @IBOutlet weak var quantityLabel: UILabel!
     @IBOutlet weak var priceLabel: CurrencyLabel!
     @IBOutlet weak var earningsLabel: CurrencyLabel!
+    @IBOutlet weak var flagImage: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var inCreaseButton: UIButton!
@@ -71,6 +72,8 @@ class StockDetailViewController: UIViewController {
         worthLabel.text = "\(stock.worth)"
         priceLabel.text = "\(stock.price)"
         earningsLabel.text = "\(stock.earnings)"
+        
+        flagImage.image = stock.isUSD ? UIImage(named: "us.square") : UIImage(named: "canada.square")
         
         //Set tabel view delegate and datasource
         tableView.delegate = self
