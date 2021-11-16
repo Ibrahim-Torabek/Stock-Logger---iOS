@@ -11,6 +11,9 @@ import CoreData
 
 class ViewController: UIViewController {
     //MARK: - Properties
+    let APIKey = "WMHZQM8S5LZ9EB4W"
+    var currencyRating = 1.25
+    
     static var coreDataStack = CoreDataStack(modelName: "StockModel")
     var stocks = [Stock]()
     var soldStocks = [SoldStock]()
@@ -43,6 +46,10 @@ class ViewController: UIViewController {
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: UIControl.Event.valueChanged)
         tableView.addSubview(refreshControl)
         
+
+        
+        loadStockData()
+        
     }
     
     
@@ -64,8 +71,12 @@ class ViewController: UIViewController {
                 [unowned self] in
                 
                 for stock in self!.stocks {
-                    if let url = self?.createStockUrl(for: stock.symbol!) {
-                        self?.fetchStock(from: url, to: stock)
+                    if let symbol = stock.symbol {
+                        if let url = self?.createStockUrl(for: symbol) {
+                            self?.fetchStock(from: url, to: stock)
+                        }
+                    } else {
+                        print("stock symbol error: \(stock)")
                     }
                     
                 }
@@ -86,19 +97,26 @@ class ViewController: UIViewController {
         var soldStockEarnings = 0.0
         
         for stock in stocks {
-            activeEarnings += stock.earnings
+            // Just display in CAD currentcy
+            let rating = stock.isUSD ? currencyRating : 1.0
+            activeEarnings += (stock.earnings * rating)
         }
         
         for stock in soldStocks {
-            soldStockEarnings += stock.earnings
+            // Just display in CAD currentcy
+            let rating = stock.isUSD ? currencyRating : 1.0
+            soldStockEarnings += (stock.earnings * rating)
         }
         
         activeEarningsLabel.text = "\(activeEarnings)"
         soldEarningsLabel.text = "\(soldStockEarnings)"
         
         totalEarningsLabel.text = "\(activeEarnings + soldStockEarnings)"
+
         
+        print(currencyRating)
     }
+
     
     
     //MARK: - Sold Stock Function
@@ -131,10 +149,53 @@ class ViewController: UIViewController {
         self.tableView.deleteRows(at: [indexPath], with: .automatic)
     }
     
+    //MARK: - Fetch CAD Currency Rating
+    func fetchCurrency(){
+        var urlString = "https://www.alphavantage.co/query?"
+        urlString = urlString.appending("function=CURRENCY_EXCHANGE_RATE&")
+        urlString = urlString.appending("from_currency=USD&")
+        urlString = urlString.appending("to_currency=CAD&")
+        urlString = urlString.appending("apikey=\(APIKey)")
+        
+        if let url = URL(string: urlString){
+            URLSession.shared.dataTask(with: url){
+                data, response, error in
+                
+                var currency: Currency?
+                
+                if let error = error {
+                    print("Failed to fetch CAD: \(error.localizedDescription)")
+                } else {
+                    do {
+                        guard let someData = data else { return }
+                        
+                        let jSonDecoder = JSONDecoder()
+                        
+                        let downloadExchange = try jSonDecoder.decode(CurrencyExchange.self, from: someData)
+
+                        currency = downloadExchange.currency
+                                                
+                    } catch let error {
+                        print("Currency fetching error: \(error.localizedDescription)")
+                    }
+                    
+                    DispatchQueue.main.async {
+                        if let currency = currency {
+                            if let rate = currency.rate {
+                                self.currencyRating = (rate as NSString).doubleValue
+                                self.calculateEarnings()
+                            }
+                        }
+                    }
+                }
+                
+            }.resume()
+        }
+    }
+    
     
     //MARK: - Objcs
     @objc func refresh(_ sender: AnyObject){
-
         loadStockData()
         refreshControl.endRefreshing()
     }
@@ -148,6 +209,7 @@ extension ViewController: UITableViewDelegate{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        fetchCurrency()
         loadStockData()
         
     }
@@ -296,6 +358,8 @@ extension ViewController:UITableViewDataSource{
         cell.priceLabel.text = "\(stock.price)"
         cell.erningsLabel.text = "\(stock.earnings)"
         
+        cell.flagImage.image = stock.isUSD ? UIImage(named: "us.square") : UIImage(named: "canada.square")
+        
 
 
         // TODO: - Change image according to the earnings
@@ -324,7 +388,7 @@ extension ViewController:UITableViewDataSource{
         var urlString = "https://www.alphavantage.co/query?"
         urlString = urlString.appending("function=GLOBAL_QUOTE&")
         urlString = urlString.appending("symbol=\(cleanURL)&")
-        urlString = urlString.appending("apikey=WMHZQM8S5LZ9EB4W")
+        urlString = urlString.appending("apikey=\(APIKey)")
         
         
         return URL(string: urlString)
@@ -332,7 +396,6 @@ extension ViewController:UITableViewDataSource{
     
     
     func fetchStock(from url: URL, to stock: Stock){
-        
         
         let stockTask = URLSession.shared.dataTask(with: url){
             data, response, error in
@@ -350,9 +413,9 @@ extension ViewController:UITableViewDataSource{
                     
                     let donwloadGlobalquote = try jSonDecoder.decode(GlobalQuote.self, from: someData)
                     
-                    if let symbol = donwloadGlobalquote.stockDetail.price {
-                        print(symbol)
-                    }
+//                    if let symbol = donwloadGlobalquote.stockDetail.price {
+//                        print(symbol)
+//                    }
                     
                     stockDetail = donwloadGlobalquote.stockDetail
                     
@@ -389,6 +452,7 @@ class StockCell: UITableViewCell {
     @IBOutlet weak var priceLabel: CurrencyLabel!
     @IBOutlet weak var erningsLabel: CurrencyLabel!
     @IBOutlet weak var highLowImage: UIImageView!
+    @IBOutlet weak var flagImage: UIImageView!
 }
 
 

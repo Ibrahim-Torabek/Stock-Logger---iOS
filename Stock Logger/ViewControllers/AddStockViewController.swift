@@ -60,12 +60,14 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
         activeStock.boughtPrice = price
         activeStock.boughtDate = boughtDatePicker.date
         
+        
         switch inCreaseDeCrease {
         case 0: // Add new Stock
             let stock = Stock(context: coreDataStack.managedContext)
             
             stock.symbol = symbol
             stock.companyName = companyName
+            stock.isUSD = isUsdSwitch.isOn
             let worth = price  + 2.0 * 5.95 / Double(quantity)
             
             
@@ -227,6 +229,10 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
         return 12
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        // Just for constraint warning
+        return 44.5
+    }
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)

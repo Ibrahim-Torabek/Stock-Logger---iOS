@@ -26,7 +26,7 @@ class SearchViewController: UIViewController {
         tableView.dataSource = self
         
         searchTextField.delegate = self
-        
+        searchTextField.becomeFirstResponder()
     }
     
 
@@ -49,7 +49,9 @@ extension SearchViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let vc = addStockViewController {
             vc.companyNameTextField.text = detailedStocks[indexPath.row].companyName
-            vc.symbolTextField.text = detailedStocks[indexPath.row].symbol
+            vc.symbolTextField.text = detailedStocks[indexPath.row].keywords
+            
+            vc.isUsdSwitch.isOn = detailedStocks[indexPath.row].currency == "USD" ? true : false
         }
         self.dismiss(animated: true, completion: nil)
     }
@@ -65,10 +67,11 @@ extension SearchViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
-        cell.textLabel?.text = detailedStocks[indexPath.row].symbol
+        cell.textLabel?.text = detailedStocks[indexPath.row].keywords
         cell.detailTextLabel?.text = detailedStocks[indexPath.row].companyName
-        cell.imageView?.image = UIImage(systemName: "folder.circle")
         
+        cell.imageView?.image = detailedStocks[indexPath.row].currency == "CAD" ? UIImage(named: "canada.circle") : UIImage(named: "us.circle")
+
         return cell
     }
     
@@ -76,28 +79,75 @@ extension SearchViewController: UITableViewDataSource{
 }
 
 extension SearchViewController: UITextFieldDelegate{
-    override class func didChangeValue(forKey key: String) {
-//        var stock = StockDetail()
-//
-//        stock.companyName = "Zomedica Pharma"
-//        stock.symbol = "ZOM"
-//
-//        self.detailedStocks.append(stock)
-    }
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
         if let text = textField.text {
             print(text)
-            var stock = StockDetail()
-    
-            stock.companyName = "Zomedica Pharma"
-            stock.symbol = text
-            detailedStocks.append(stock)
             
-            tableView.reloadData()
+            if let url = createStockUrl(for: text) {
+                fetchStock(from: url)
+            }
+            
         }
     }
     
 
+    // MARK: - Fetch Stock API
+    func createStockUrl(for keywords: String) -> URL?{
+        
+        guard let cleanURL = keywords.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { fatalError("Can't create a valid URL") }
+        
+        var urlString = "https://www.alphavantage.co/query?"
+        urlString = urlString.appending("function=SYMBOL_SEARCH&")
+        urlString = urlString.appending("keywords=\(cleanURL)&")
+        urlString = urlString.appending("apikey=WMHZQM8S5LZ9EB4W")
+        
+        
+        return URL(string: urlString)
+    }
+    
+    
+    func fetchStock(from url: URL){
+        
+        
+        let stockTask = URLSession.shared.dataTask(with: url){
+            data, response, error in
+            
+            
+            if let error = error {
+                print("Failed to fetch: \(error.localizedDescription)")
+            } else {
+                do {
+                    guard let someData = data else { return }
+                    
+                    
+                    let jSonDecoder = JSONDecoder()
+                    
+                    let donwloadBestMetches = try jSonDecoder.decode(BestMetches.self, from: someData)
+                    
+                    let fetchedstocks = donwloadBestMetches.bestMatches
+                    
+                    self.detailedStocks = fetchedstocks.filter{
+                        $0.currency == "USD" || $0.currency == "CAD"
+                    }
+                    
+                    
+                } catch {
+                    print("Only can fetch 5 stocks per minute due to free API key.")
+//                    print("Searhc symbol failed: \(error.localizedDescription)")
+                }
+                
+                DispatchQueue.main.async {
+
+                    self.tableView.reloadData()
+
+                }
+            }
+            
+            
+        }
+        
+        stockTask.resume()
+    }
 }
 

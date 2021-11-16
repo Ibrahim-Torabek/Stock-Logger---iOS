@@ -24,6 +24,7 @@ struct BestMetches: Codable {
 // Got more information for the future.
 struct StockDetail: Codable {
     var symbol: String?
+    var keywords: String?
     var companyName: String?
     var price: String?
     var open: String?
@@ -33,6 +34,7 @@ struct StockDetail: Codable {
     
     enum CodingKeys: String, CodingKey{
         case symbol = "01. symbol"
+        case keywords = "1. symbol"
         case companyName = "2. name"
         case price = "05. price"
         case open = "02. open"
