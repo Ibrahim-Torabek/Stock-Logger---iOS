@@ -25,23 +25,34 @@ class StockDetailViewController: UIViewController {
     @IBOutlet weak var worthLabel: CurrencyLabel!
     @IBOutlet weak var deCreaseButton: UIButton!
     
+
+
+
     
-    //MARK: - Actions
-    @IBAction func deCreaseButton(_ sender: UIButton) {
-    }
     
-    @IBAction func inCreaseButton(_ sender: UIButton) {
+    //MARK: - View Did Load
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        title = stock.symbol
+        
+        loadStatistics()
+        
+        flagImage.image = stock.isUSD ? UIImage(named: "us.square") : UIImage(named: "canada.square")
+        
+        //Set tabel view delegate and datasource
+        tableView.delegate = self
+        tableView.dataSource = self
         
     }
     
+    //MARK: - Prepare Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         guard let button = sender as? UIButton else { return }
         
         let vc = segue.destination as? AddStockViewController
         vc?.stock = stock
-
-//        vc?.stock =
         
         switch button {
         case inCreaseButton:
@@ -61,26 +72,14 @@ class StockDetailViewController: UIViewController {
     }
     
     
-    //MARK: - View Did Load
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        title = stock.symbol
-        
+    //MARK: - Funcitons
+    func loadStatistics(){
         companyNameLabel.text = stock.companyName
         quantityLabel.text = "\(stock.quantity)"
         worthLabel.text = "\(stock.worth)"
         priceLabel.text = "\(stock.price)"
         earningsLabel.text = "\(stock.earnings)"
-        
-        flagImage.image = stock.isUSD ? UIImage(named: "us.square") : UIImage(named: "canada.square")
-        
-        //Set tabel view delegate and datasource
-        tableView.delegate = self
-        tableView.dataSource = self
-        
     }
-    
     
     
 
@@ -102,10 +101,54 @@ extension StockDetailViewController: UITableViewDelegate{
         super.viewWillAppear(animated)
         
         activeStocks = (stock.activeStocks?.allObjects as? [ActiveStock])!
+        
+        // Sort stock activity by date, place newest transaction on the top
+        activeStocks.sort{
+            $0.boughtDate! > $1.boughtDate!
+        }
         quantityLabel.text = "\(stock.quantity)"
         worthLabel.text = "\(stock.worth)"
         earningsLabel.text = "\(stock.earnings)"
         tableView.reloadData()
+        
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        switch editingStyle {
+        case .delete:
+            
+            ViewController.coreDataStack.managedContext.delete(activeStocks[indexPath.row])
+            
+            activeStocks.remove(at: indexPath.row)
+            
+            // Recalculate total quantity and total worth
+            var totalQuantity = Int16(0)
+            print("Mapping")
+            print(activeStocks.map{
+                totalQuantity += $0.quantity
+            })
+            
+            
+            var worth = 0.0
+            
+            for active in activeStocks {
+                let weight = active.worth * Double(active.quantity) / Double(totalQuantity)
+                print("Weight is \(weight)")
+                worth = worth + weight
+            }
+            stock.quantity = totalQuantity
+            stock.worth = worth
+            
+            
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            loadStatistics()
+            
+            ViewController.coreDataStack.saveContext()
+            
+        default:
+            break
+        }
     }
 }
 

@@ -632,7 +632,6 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Decrease ( - )"/>
                                 <connections>
-                                    <action selector="deCreaseButton:" destination="NUc-WE-ecX" eventType="touchUpInside" id="jbz-oD-XN2"/>
                                     <segue destination="8IO-lW-pXV" kind="show" id="r6a-Z0-uXs"/>
                                 </connections>
                             </button>
@@ -642,7 +641,6 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Increase ( + )"/>
                                 <connections>
-                                    <action selector="inCreaseButton:" destination="NUc-WE-ecX" eventType="touchUpInside" id="ydQ-X5-DJg"/>
                                     <segue destination="8IO-lW-pXV" kind="show" id="m4s-wy-NGb"/>
                                 </connections>
                             </button>
@@ -1059,7 +1057,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="iRq-df-MF4"/>
+        <segue reference="r6a-Z0-uXs"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Home" width="28" height="28"/>
