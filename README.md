@@ -155,8 +155,6 @@ This application can be installed on iPhone, iPad and iPod Touch
 <kbd>![Dashboard](Images/rightSwipe.png)</kbd>
 <kbd>![Dashboard](Images/leftSwipe.png)</kbd>
 
-### Images of home screen
-<kbd>![Dashboard](Images/home.png)</kbd>
 
 ### Images of detail view screen
 <kbd>![Dashboard](Images/detailView.png)</kbd>
