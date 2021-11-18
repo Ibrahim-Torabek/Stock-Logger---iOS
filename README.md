@@ -151,41 +151,31 @@ This application can be installed on iPhone, iPad and iPod Touch
 ### Images of home screen
 <kbd>![Dashboard](Images/home.png)</kbd>
 
+### Images of right and left swipe
+<kbd>![Dashboard](Images/rightSwipe.png)</kbd>
+<kbd>![Dashboard](Images/leftSwipe.png)</kbd>
 
-### Images of Add Stock Fragment
-<kbd>![AddStock](screenshots/add1.png)</kbd>
-<kbd>![AddStock](screenshots/add2.png)</kbd>
+### Images of home screen
+<kbd>![Dashboard](Images/home.png)</kbd>
 
 
-### Image of Sell Stock Fragment
-<kbd>![Soldstock](screenshots/sell.png)</kbd>
+### Images of Add Stock Screen
+<kbd>![AddStock](Images/addStock.png)</kbd>
 
-### Image of Sold Stock Fragment
-<kbd>![Soldstock](screenshots/sold_stock.png)</kbd>
+### Images of Search Stock Screen
+<kbd>![AddStock](Images/searchStock.png)</kbd>
 
-### Image of About Us Fragment
-<kbd>![About](screenshots/about.png)</kbd>
 
-### Image of Contact Fragment
-<kbd>![Contact](screenshots/contact.png)</kbd>
+### Image of Sold Stock Screen
+<kbd>![Soldstock](Images/soldStock.png)</kbd>
 
 ### Image of Credits Fragment
-<kbd>![Credits](screenshots/credits.png)</kbd>
+<kbd>![Credits](Imageg/credits.png)</kbd>
 
-### Image of Setting Activity
-<kbd>![Setting](screenshots/setting.png)</kbd>
-
-### Images of Tablet
-<kbd>![Tablet](screenshots/t_dash.png)</kbd>
-
-<kbd>![Tablet](screenshots/t_sold.png)</kbd>
-
-<kbd>![Tablet](screenshots/t_contact.png)</kbd>
 
 
 
 ## Acknowledgments
-I want to especially thank my teacher Prof. Cai Filiault.
-He taught me how to use Android Studio to complete application
-development.
+I want to especially thank my teacher Prof. Darren Takaki.
+
 
