@@ -17,16 +17,16 @@ class CreditViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+        // I used only three sections and hard coded all sections
         return 3
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        
         switch section{
-        case 0:
+        case 0: // first section is Icons, has four icons, used 4 cells
             return 4
-        default:
+        default: // Second and third sections only have one cell
             return 1
         }
     }
@@ -56,12 +56,18 @@ class CreditViewController: UITableViewController {
     }
     
     //MARK: - Show Site Function
+    /// Open the source's web page of the credits by SafariViewController
+    /// - Parameter url: The address of the source's web page.
     func showSite(_ url: String){
+        // Turn url string into URL format
         if let url = URL(string: url) {
             let config = SFSafariViewController.Configuration()
             config.entersReaderIfAvailable = true
 
+            // Configurate SafariViewController
             let destinationVC = SFSafariViewController(url: url, configuration: config)
+            
+            // Open webpage
             present(destinationVC, animated: true)
         }
     }

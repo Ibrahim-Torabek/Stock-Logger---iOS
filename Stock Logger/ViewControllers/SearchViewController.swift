@@ -9,9 +9,11 @@ import UIKit
 
 class SearchViewController: UIViewController {
     //MARK: - Properties
+    // Get the parent(AddStockViewController) view to send back the searched results
+    // The parent will set itself to this variable
     var addStockViewController: AddStockViewController!
     
-    
+    // Variable for save the fetched search result
     var detailedStocks = [StockDetail]()
 
     //MARK: - Outlets
@@ -25,20 +27,11 @@ class SearchViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
+        // Used UITextDeleget to get entered charachters for search
         searchTextField.delegate = self
         searchTextField.becomeFirstResponder()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
 
 }
@@ -47,12 +40,16 @@ class SearchViewController: UIViewController {
 //MARK: - Table View Delegate
 extension SearchViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        // When selected a stock from the table view, save the symbol, company name and isUSD to the parent view
         if let vc = addStockViewController {
             vc.companyNameTextField.text = detailedStocks[indexPath.row].companyName
             vc.symbolTextField.text = detailedStocks[indexPath.row].keywords
             
             vc.isUsdSwitch.isOn = detailedStocks[indexPath.row].currency == "USD" ? true : false
         }
+        
+        // Dissmis SearchView to return parent view
         self.dismiss(animated: true, completion: nil)
     }
 }
@@ -67,6 +64,7 @@ extension SearchViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
+        // Show all fetched results
         cell.textLabel?.text = detailedStocks[indexPath.row].keywords
         cell.detailTextLabel?.text = detailedStocks[indexPath.row].companyName
         
@@ -80,10 +78,12 @@ extension SearchViewController: UITableViewDataSource{
 
 extension SearchViewController: UITextFieldDelegate{
     
+    /// Fetch matched stocks from API when user typed a charachter
+    /// - Warning: Only can fetch 5 times per minute due to free API Key
     func textFieldDidChangeSelection(_ textField: UITextField) {
         if let text = textField.text {
-            print(text)
             
+            // fetch from API
             if let url = createStockUrl(for: text) {
                 fetchStock(from: url)
             }
@@ -93,6 +93,9 @@ extension SearchViewController: UITextFieldDelegate{
     
 
     // MARK: - Fetch Stock API
+    /// Create stock url according to given stock symbol
+    /// - Parameter keywords: symbols' keywords for search the best mathed stockes
+    /// - Returns: Fetchable  API URL
     func createStockUrl(for keywords: String) -> URL?{
         
         guard let cleanURL = keywords.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { fatalError("Can't create a valid URL") }
@@ -106,9 +109,10 @@ extension SearchViewController: UITextFieldDelegate{
         return URL(string: urlString)
     }
     
-    
+    /// Fetch all metched stocks from API by given keywords
+    /// - Parameters:
+    ///   - url: Fetchable stock API URL with given keywords
     func fetchStock(from url: URL){
-        
         
         let stockTask = URLSession.shared.dataTask(with: url){
             data, response, error in
@@ -123,10 +127,13 @@ extension SearchViewController: UITextFieldDelegate{
                     
                     let jSonDecoder = JSONDecoder()
                     
+                    // Download all matched stocks
                     let donwloadBestMetches = try jSonDecoder.decode(BestMetches.self, from: someData)
                     
+                    // Get all matched stocks
                     let fetchedstocks = donwloadBestMetches.bestMatches
                     
+                    // Filter only Cnadian or US companies
                     self.detailedStocks = fetchedstocks.filter{
                         $0.currency == "USD" || $0.currency == "CAD"
                     }
@@ -143,7 +150,6 @@ extension SearchViewController: UITextFieldDelegate{
 
                 }
             }
-            
             
         }
         

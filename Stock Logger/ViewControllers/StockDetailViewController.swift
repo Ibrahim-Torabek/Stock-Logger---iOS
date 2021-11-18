@@ -9,7 +9,7 @@ import UIKit
 
 class StockDetailViewController: UIViewController {
     //MARK: - Properties
-    var stock: Stock!
+    var stock: Stock! // Get value from ViewController
     var activeStocks = [ActiveStock]()
     
     
@@ -34,10 +34,12 @@ class StockDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // St title as stock's symbol
         title = stock.symbol
         
         loadStatistics()
         
+        // Launch US or Canada Flag
         flagImage.image = stock.isUSD ? UIImage(named: "us.square") : UIImage(named: "canada.square")
         
         //Set tabel view delegate and datasource
@@ -47,13 +49,19 @@ class StockDetailViewController: UIViewController {
     }
     
     //MARK: - Prepare Segue
+    /// Prepare to Open AddStockViewCOntroller to  increase or decrease stock amount
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
+        // Test if Increase or Decrease button touched
         guard let button = sender as? UIButton else { return }
         
+        // Get AddStockViewController as destination
         let vc = segue.destination as? AddStockViewController
+        
+        // Set stock of AddStockViewConroller
         vc?.stock = stock
         
+        // Check witch button touched
         switch button {
         case inCreaseButton:
             vc?.inCreaseDeCrease = 1
@@ -73,6 +81,7 @@ class StockDetailViewController: UIViewController {
     
     
     //MARK: - Funcitons
+    /// Load Statistics from given stock
     func loadStatistics(){
         companyNameLabel.text = stock.companyName
         quantityLabel.text = "\(stock.quantity)"
@@ -81,17 +90,6 @@ class StockDetailViewController: UIViewController {
         earningsLabel.text = "\(stock.earnings)"
     }
     
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
@@ -100,6 +98,7 @@ extension StockDetailViewController: UITableViewDelegate{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        // Get all stock transactions from Stock CoreData
         activeStocks = (stock.activeStocks?.allObjects as? [ActiveStock])!
         
         // Sort stock activity by date, place newest transaction on the top
@@ -115,23 +114,25 @@ extension StockDetailViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
+        // Delete a transaction
         switch editingStyle {
         case .delete:
             
+            // Delete from Core Data
             ViewController.coreDataStack.managedContext.delete(activeStocks[indexPath.row])
-            
+            // Remove from array
             activeStocks.remove(at: indexPath.row)
             
             // Recalculate total quantity and total worth
             var totalQuantity = Int16(0)
-            print("Mapping")
-            print(activeStocks.map{
+            // Calculate all quantities by mapping
+            let _ = activeStocks.map{
                 totalQuantity += $0.quantity
-            })
+            }
             
             
             var worth = 0.0
-            
+            // Re-calculate all wieghts and total worth
             for active in activeStocks {
                 let weight = active.worth * Double(active.quantity) / Double(totalQuantity)
                 print("Weight is \(weight)")
@@ -139,6 +140,7 @@ extension StockDetailViewController: UITableViewDelegate{
             }
             stock.quantity = totalQuantity
             stock.worth = worth
+            stock.earnings = (stock.price - stock.worth) * Double(totalQuantity)
             
             
             tableView.deleteRows(at: [indexPath], with: .automatic)
@@ -168,12 +170,11 @@ extension StockDetailViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCell", for: indexPath) as! DetailCell
         
-        
-        //TODO: - Put data formatter a better place
+        // Set date formatter
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM d, y"
 
-        
+        // Display All transactions
         let activeStock = activeStocks[indexPath.row]
         cell.boutDateLabel.text = "\(dateFormatter.string(from: activeStock.boughtDate!))"
         cell.quantityLabel.text = "\(activeStock.quantity)"
@@ -189,6 +190,7 @@ extension StockDetailViewController: UITableViewDataSource{
 
 
 //MARK: - Custom Table View Cell
+/// This class is TableViewClass to declare all outlet properties for each cell
 class DetailCell: UITableViewCell{
     //MARK: - Cell Outlets
     @IBOutlet weak var boutDateLabel: UILabel!

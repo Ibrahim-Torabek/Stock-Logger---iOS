@@ -96,6 +96,17 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
 
             // get stock from stocks array by given symbol
             if let stock = stocks.first(where: {$0.symbol == symbol}) {
+                
+                // Check if decreasing a large than active stocks quantity
+                if inCreaseDeCrease == -1, stock.quantity <= quantity{
+                    let ac = UIAlertController(title: "Cannot Decrease", message: "Entered decrease amount equal or more than stock quantity, If you sold out the stock please mark as sold in home screen", preferredStyle: .alert)
+                    ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    present(ac, animated: true)
+                    alertBorder(quantityTextField)
+                    return
+                }
+                
+                
                 // add(1) or remove(-1) quantity from total quantity
                 quantity = Int16(inCreaseDeCrease) * quantity
                 let totalQuantity = quantity + stock.quantity
