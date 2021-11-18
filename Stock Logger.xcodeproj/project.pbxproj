@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		003D7A0C271D0B0F00C088D0 /* AddStockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003D7A0B271D0B0F00C088D0 /* AddStockViewController.swift */; };
+		004252F427460E39003CBBDD /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 004252F327460E39003CBBDD /* README.md */; };
 		00448C482745DB2200FAD32C /* CreditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00448C472745DB2200FAD32C /* CreditViewController.swift */; };
 		008443DF273B6CDF007A29BB /* SoldStockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008443DE273B6CDF007A29BB /* SoldStockViewController.swift */; };
 		00914F45271FA9BE009FB9E2 /* Stock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00914F44271FA9BE009FB9E2 /* Stock.swift */; };
@@ -27,6 +28,7 @@
 
 /* Begin PBXFileReference section */
 		003D7A0B271D0B0F00C088D0 /* AddStockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStockViewController.swift; sourceTree = "<group>"; };
+		004252F327460E39003CBBDD /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		00448C472745DB2200FAD32C /* CreditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditViewController.swift; sourceTree = "<group>"; };
 		008443DE273B6CDF007A29BB /* SoldStockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoldStockViewController.swift; sourceTree = "<group>"; };
 		00914F44271FA9BE009FB9E2 /* Stock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stock.swift; sourceTree = "<group>"; };
@@ -70,6 +72,13 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
+		004252F5274612AE003CBBDD /* Images */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		00448C462745ACAD00FAD32C /* Delegates */ = {
 			isa = PBXGroup;
 			children = (
@@ -93,6 +102,8 @@
 		00FEBAD52701680600D10841 = {
 			isa = PBXGroup;
 			children = (
+				004252F5274612AE003CBBDD /* Images */,
+				004252F327460E39003CBBDD /* README.md */,
 				00FEBAE02701680600D10841 /* Stock Logger */,
 				00FEBADF2701680600D10841 /* Products */,
 			);
@@ -189,6 +200,7 @@
 			files = (
 				00FEBAEE2701680B00D10841 /* LaunchScreen.storyboard in Resources */,
 				00FEBAEB2701680B00D10841 /* Assets.xcassets in Resources */,
+				004252F427460E39003CBBDD /* README.md in Resources */,
 				00FEBAE92701680600D10841 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
