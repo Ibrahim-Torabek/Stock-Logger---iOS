@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		003D7A0C271D0B0F00C088D0 /* AddStockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003D7A0B271D0B0F00C088D0 /* AddStockViewController.swift */; };
+		00448C482745DB2200FAD32C /* CreditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00448C472745DB2200FAD32C /* CreditViewController.swift */; };
 		008443DF273B6CDF007A29BB /* SoldStockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008443DE273B6CDF007A29BB /* SoldStockViewController.swift */; };
 		00914F45271FA9BE009FB9E2 /* Stock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00914F44271FA9BE009FB9E2 /* Stock.swift */; };
 		00A2BEF2272C4D5C00B1DBF5 /* StockDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A2BEF1272C4D5C00B1DBF5 /* StockDetailViewController.swift */; };
@@ -26,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		003D7A0B271D0B0F00C088D0 /* AddStockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStockViewController.swift; sourceTree = "<group>"; };
+		00448C472745DB2200FAD32C /* CreditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditViewController.swift; sourceTree = "<group>"; };
 		008443DE273B6CDF007A29BB /* SoldStockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoldStockViewController.swift; sourceTree = "<group>"; };
 		00914F44271FA9BE009FB9E2 /* Stock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stock.swift; sourceTree = "<group>"; };
 		00A2BEF1272C4D5C00B1DBF5 /* StockDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockDetailViewController.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 				00A2BEF1272C4D5C00B1DBF5 /* StockDetailViewController.swift */,
 				008443DE273B6CDF007A29BB /* SoldStockViewController.swift */,
 				00F0A2B1274080770090D336 /* SearchViewController.swift */,
+				00448C472745DB2200FAD32C /* CreditViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -109,10 +112,10 @@
 				00448C462745ACAD00FAD32C /* Delegates */,
 				00914F43271FA94B009FB9E2 /* Models */,
 				003D7A0D271D0B1E00C088D0 /* ViewControllers */,
-				00B11A16271A59BF00BFA504 /* StockModel.xcdatamodeld */,
 				00FEBAF5270176A300D10841 /* Story Boards */,
 				00FEBAEA2701680B00D10841 /* Assets.xcassets */,
 				00FEBAEF2701680B00D10841 /* Info.plist */,
+				00B11A16271A59BF00BFA504 /* StockModel.xcdatamodeld */,
 			);
 			path = "Stock Logger";
 			sourceTree = "<group>";
@@ -207,6 +210,7 @@
 				008443DF273B6CDF007A29BB /* SoldStockViewController.swift in Sources */,
 				00FEBAE42701680600D10841 /* SceneDelegate.swift in Sources */,
 				00B11A18271A59BF00BFA504 /* StockModel.xcdatamodeld in Sources */,
+				00448C482745DB2200FAD32C /* CreditViewController.swift in Sources */,
 				00A2BEF4272C507400B1DBF5 /* CurrencyLabel.swift in Sources */,
 				003D7A0C271D0B0F00C088D0 /* AddStockViewController.swift in Sources */,
 			);

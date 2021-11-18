@@ -280,33 +280,93 @@
             </objects>
             <point key="canvasLocation" x="1855.072463768116" y="83.705357142857139"/>
         </scene>
-        <!--Credits-->
-        <scene sceneID="0Kl-mE-Sdc">
+        <!--Credit View Controller-->
+        <scene sceneID="mNz-Wz-5U3">
             <objects>
-                <viewController id="zVQ-9r-AcX" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="2Go-Tb-mSN">
+                <tableViewController id="kL0-kD-5zL" customClass="CreditViewController" customModule="Stock_Logger" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="TRc-FJ-wvr">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Credits" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ByF-lV-5qJ">
-                                <rect key="frame" x="130.5" y="59" width="153" height="60"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="lPb-uL-BY6"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="ByF-lV-5qJ" firstAttribute="top" secondItem="lPb-uL-BY6" secondAttribute="top" constant="15" id="97s-c5-eXF"/>
-                            <constraint firstItem="ByF-lV-5qJ" firstAttribute="centerX" secondItem="2Go-Tb-mSN" secondAttribute="centerX" id="OA7-MV-MZP"/>
-                        </constraints>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Credits" id="FyG-XP-Zj6"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WGz-er-4D9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                        <sections>
+                            <tableViewSection headerTitle="Icon Credits" id="Im6-9i-fzG">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell1" id="Amd-r2-G6P">
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="72.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Amd-r2-G6P" id="FFz-4I-f4e">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="72.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <listContentConfiguration key="contentConfiguration" style="subtitleCell" text="Canada Falg Suquare Icon" secondaryText="Subtitle" image="canada.square"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell2" id="ZgW-Id-Nw6">
+                                        <rect key="frame" x="0.0" y="117" width="414" height="40.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZgW-Id-Nw6" id="2zA-9F-XrZ">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="40.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <listContentConfiguration key="contentConfiguration" style="subtitleCell" text="Canada Flag Circle Icon" secondaryText="Subtitle" image="canada.circle"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell3" id="HH1-v2-QJi">
+                                        <rect key="frame" x="0.0" y="157.5" width="414" height="72.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HH1-v2-QJi" id="Hwg-Ab-Kt1">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="72.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <listContentConfiguration key="contentConfiguration" style="subtitleCell" text="US Flag Square Icon" secondaryText="Subtitle" image="us.square"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell4" id="dDV-Z7-1r2">
+                                        <rect key="frame" x="0.0" y="230" width="414" height="40.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dDV-Z7-1r2" id="ul4-pi-iWO">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="40.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <listContentConfiguration key="contentConfiguration" style="subtitleCell" text="US Flag Circle Icon" secondaryText="Subtitle" image="us.circle"/>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Code Credit" id="gHe-gG-aRa">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="LQf-OW-nHj">
+                                        <rect key="frame" x="0.0" y="337.5" width="414" height="39"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LQf-OW-nHj" id="SQf-Jh-Uew">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="39"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <listContentConfiguration key="contentConfiguration" style="subtitleCell" text="CoreDateStack Class" secondaryText="Prof. Darren Takaki"/>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="API Credit" id="0DK-QB-uFg">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="phM-Ja-h0r">
+                                        <rect key="frame" x="0.0" y="443.5" width="414" height="39"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="phM-Ja-h0r" id="rwj-4f-vFh">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="39"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <listContentConfiguration key="contentConfiguration" style="subtitleCell" text="Stock and Exchange Rate API" secondaryText="Alphavantage"/>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="kL0-kD-5zL" id="cHd-wM-5wh"/>
+                            <outlet property="delegate" destination="kL0-kD-5zL" id="0wU-tg-MBV"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="" image="Credits" id="PJ0-2F-Zgn"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rdr-Oj-1mj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-430" y="814"/>
+            <point key="canvasLocation" x="-396" y="814"/>
         </scene>
         <!--Sold Stock View Controller-->
         <scene sceneID="Ccy-WH-P4R">
@@ -1037,6 +1097,7 @@
             <objects>
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="opd-os-7DB" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="JRJ-Cy-gO7"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="rzH-uE-H6Q">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1044,8 +1105,8 @@
                     </tabBar>
                     <connections>
                         <segue destination="Eua-yV-nDg" kind="relationship" relationship="viewControllers" id="RDR-55-vUJ"/>
-                        <segue destination="zVQ-9r-AcX" kind="relationship" relationship="viewControllers" id="Fgi-hv-nka"/>
                         <segue destination="dWk-ok-B0V" kind="relationship" relationship="viewControllers" id="bAm-dI-XRi"/>
+                        <segue destination="kL0-kD-5zL" kind="relationship" relationship="viewControllers" id="gEY-aB-ibr"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sxs-SV-4ib" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1057,11 +1118,15 @@
         <segue reference="r6a-Z0-uXs"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="Credits" width="51" height="36"/>
         <image name="Home" width="28" height="28"/>
         <image name="Sold-Black" width="28" height="28"/>
+        <image name="canada.circle" width="32" height="32"/>
         <image name="canada.square" width="64" height="64"/>
         <image name="folder.circle" catalog="system" width="128" height="121"/>
         <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="us.circle" width="32" height="32"/>
+        <image name="us.square" width="64" height="64"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
