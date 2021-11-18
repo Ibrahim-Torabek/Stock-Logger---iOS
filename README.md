@@ -147,13 +147,10 @@ This application can be installed on iPhone, iPad and iPod Touch
 
 ## Screen Shots
 
-### Image of Menu Fragment
-<kbd>![Menu](screenshots/menu.png)</kbd>
 
+### Images of home screen
+<kbd>![Dashboard](Images/home.png)</kbd>
 
-### Images of Dashboard(main) Fragment
-<kbd>![Dashboard](screenshots/dashboard.png)</kbd>
-<kbd>![Dashboard](screenshots/dashboard1.png)</kbd>
 
 ### Images of Add Stock Fragment
 <kbd>![AddStock](screenshots/add1.png)</kbd>
