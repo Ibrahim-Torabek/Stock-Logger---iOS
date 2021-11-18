@@ -21,7 +21,7 @@ Most stock trading software does not calculate the detailed costs.
 In this app, you just need to log into your bought or sold stocks.
 You can estimate the selling price by setting your willing profit.
 
-![Usage](screenshots/main.gif)
+![Usage](images/OverView.gif)
 
 ## Getting Started
 Stock Logger is an Android app, and it is very easy to use.
