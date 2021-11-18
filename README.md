@@ -171,7 +171,7 @@ This application can be installed on iPhone, iPad and iPod Touch
 <kbd>![Soldstock](Images/soldStock.png)</kbd>
 
 ### Image of Credits Fragment
-<kbd>![Credits](Imageg/credits.png)</kbd>
+<kbd>![Credits](Images/credits.png)</kbd>
 
 
 
