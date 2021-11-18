@@ -10,15 +10,12 @@ import CoreData
 
 class AddStockViewController: UITableViewController, UITextFieldDelegate {
     //MARK: - Properties
+    // Get coreDataStack from ViewController
     var coreDataStack = ViewController.coreDataStack
     var stocks = [Stock]()
-    //var fetchedResultsController: NSFetchedResultsController<Stock>!
     
+    // Current stock
     var stock: Stock!
-    // inCreaseDeCrease = 0 create new
-    // inCreaseDeCrease = 1 Increase
-    // inCreaseDeCrease = -1 Decrease
-    // inCreaseDeCrease = 2 Edit symbol and company name
     var inCreaseDeCrease = 0
     
     
@@ -36,9 +33,9 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
         
         // Resign First Reponder
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-        //.resignFirstResponder()
         
         // To check wich field is empty, used sperated guard statements.
+        // Set the TextFields border as red and return false if the TextField is empty
         guard
             let symbol = isEmpty(symbolTextField),
             let companyName = isEmpty(companyNameTextField),
@@ -49,18 +46,18 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
         }
         
         
-        // got quantity as double when check it. Convert to Int know.
+        // got quantity as double when check it to use same method with price.
+        // Convert it to Int know.
         var quantity = Int16(quantityDouble)
         
-        
-        
+        // Initiate an ActiveStock entry of core data
         let activeStock = ActiveStock(context: coreDataStack.managedContext)
         
-        
+        // olace bought price abd bought data first
         activeStock.boughtPrice = price
         activeStock.boughtDate = boughtDatePicker.date
         
-        
+        // Proced Add / Edit / Increase and Decrease amounts according to given inCreaseDeCrease value
         switch inCreaseDeCrease {
         case 0: // Add new Stock
             let stock = Stock(context: coreDataStack.managedContext)
@@ -68,6 +65,8 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
             stock.symbol = symbol
             stock.companyName = companyName
             stock.isUSD = isUsdSwitch.isOn
+            // calculate worth of stock by adding twice of promotion
+            // calculate first commition as twice to concider sell price
             let worth = price  + 2.0 * 5.95 / Double(quantity)
             
             
@@ -76,28 +75,33 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
             stock.price = price
             stock.worth = worth
             
-            
+            // Save results
             activeStock.quantity = quantity
             activeStock.worth = worth
             activeStock.stock = stock
+            // Save as child
             stock.addToActiveStocks(activeStock)
             stocks.append(stock)
             
-        case 2:
-            // Edit symbol and company name
+        case 2: // Edit symbol and company name
+            
+            // get stock from stocks array by given symbol
             if let stock = stocks.first(where: {$0.symbol == symbol}) {
+                // Change symbol and company name from TextField
                 stock.companyName = companyName
                 stock.symbol = symbol
             }
             
-        default: // Increase or Decrease Stock
+        default: // Increase Stock if value = 1, or Decrease Stock if value = -1
 
-            
+            // get stock from stocks array by given symbol
             if let stock = stocks.first(where: {$0.symbol == symbol}) {
-                
+                // add(1) or remove(-1) quantity from total quantity
                 quantity = Int16(inCreaseDeCrease) * quantity
                 let totalQuantity = quantity + stock.quantity
 
+                // Recalculate total worth of stock according to all active stocks weights.
+                // 5.95 is the dealer promotion
                 let activeStockWorth = price + 5.95 / Double(quantity)
                 activeStock.worth = activeStockWorth
                 activeStock.quantity = quantity
@@ -137,13 +141,17 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
 //        for stock in stocks {
 //            print(stock.companyName!)
 //        }
+        // First try to popViewController
         navigationController?.popViewController(animated: true)
+        // If it does not pop, it means opened by edit buton, just dismiss current view
         self.dismiss(animated: true, completion: nil)
         return
     }
     
     
-    @IBAction func refresh(_ sender: Any) {
+    //MARK: - Search action
+    /// Open search View to search a stock by symbol
+    @IBAction func search(_ sender: Any) {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "SearchStock") as! SearchViewController
@@ -153,6 +161,7 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
     
     
     
+    /// Prepare to back StockDeail ViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? StockDetailViewController {
             if let stock = stocks.first(where: {$0.symbol == self.stock.symbol}){
@@ -162,6 +171,8 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
         
     }
     
+    
+    /// Hide red border when user clicked missed text field
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.layer.borderWidth = 0.0
     }
@@ -176,6 +187,7 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
         companyNameTextField.delegate = self
         priceTextField.delegate = self
         quantityTextField.delegate = self
+        
         
         if inCreaseDeCrease == 2 {
             // If edit mode, just edit symbol and company name
@@ -196,24 +208,16 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
         
         
         
-        // Add search button
+        // Add search button to the symbol text field
         let searchButton = UIButton(type: .custom)
         searchButton.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
-        searchButton.addTarget(self, action: #selector(self.refresh), for: .touchUpInside)
+        searchButton.addTarget(self, action: #selector(self.search), for: .touchUpInside)
         
         symbolTextField.rightViewMode = .always
         symbolTextField.rightView = searchButton
 
         //Load
         loadSavedData()
-        
-
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
 
@@ -233,15 +237,6 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
         // Just for constraint warning
         return 44.5
     }
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
     
     //MARK: - Functions
     /// Check if a UITextField is empty. if it is empty, return nil and set its border's color as red, else return the text
@@ -264,12 +259,15 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
     func isDouble(_ textField: UITextField) -> Double? {
         
         guard let text = textField.text else {
+            // set border as red if missed
             alertBorder(textField)
             return nil
         }
         
+        // get double value
         let doubleValue = (text as NSString).doubleValue
         
+        // if text not empty and not numeric.
         if doubleValue == 0.0 {
             alertBorder(textField)
             return nil
@@ -279,30 +277,20 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
     }
     
     
+    /// Set missed textfield's border as red
     func alertBorder(_ textField: UITextField){
         textField.layer.borderColor = CGColor.init(red: 1, green: 0, blue: 0, alpha: 1)
         textField.layer.borderWidth = 0.5
     }
     
+    
+    /// Load Stocks from Core Data
     func loadSavedData(){
             
         let request = Stock.fetchRequest()
         
         do {
             stocks = try coreDataStack.managedContext.fetch(request)
-            //stocks =
-            
-            //TODO: - Delete following sentence
-//            stocks.map({
-//                e in
-//
-//                if let active = e.activeStocks?.allObjects as? [ActiveStock], !active.isEmpty {
-//
-//                    print("Symbol: \(active[0].boughtPrice)")
-//
-//                }
-//            })
-
 
         } catch {
             print("Fating Error!!!")
@@ -310,58 +298,5 @@ class AddStockViewController: UITableViewController, UITextFieldDelegate {
     }
 
 
-
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
-
-//MARK: - Fetch Reqeust Delegate
-//extension AddStockViewController: NSFetchedResultsControllerDelegate{
-//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-//        switch type {
-//        case .delete:
-//            print(tableView.numberOfRows(inSection: 0))
-//
-//        default:
-//            break
-//        }
-//    }
-//}
-
 

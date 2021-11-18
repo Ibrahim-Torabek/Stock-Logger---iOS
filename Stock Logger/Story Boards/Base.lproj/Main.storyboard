@@ -733,9 +733,6 @@
                                                     <rect key="frame" x="20" y="9" width="374" height="34"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no"/>
-                                                    <connections>
-                                                        <segue destination="oVs-1R-93y" kind="show" id="nDd-9e-hIA"/>
-                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -954,7 +951,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search Stock Symbol" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fec-n7-uVy">
-                                <rect key="frame" x="20" y="108" width="374" height="50"/>
+                                <rect key="frame" x="20" y="64" width="374" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="57d-py-aKG"/>
                                 </constraints>
@@ -962,7 +959,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no"/>
                             </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="6cE-V8-cil">
-                                <rect key="frame" x="20" y="178" width="374" height="635"/>
+                                <rect key="frame" x="20" y="134" width="374" height="728"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="NZc-xG-yIg" detailTextLabel="2oU-8G-dTp" style="IBUITableViewCellStyleSubtitle" id="cMf-iK-wzc">

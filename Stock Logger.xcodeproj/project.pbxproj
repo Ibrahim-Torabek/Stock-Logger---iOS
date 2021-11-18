@@ -67,6 +67,15 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
+		00448C462745ACAD00FAD32C /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				00FEBAE12701680600D10841 /* AppDelegate.swift */,
+				00FEBAE32701680600D10841 /* SceneDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
 		00914F43271FA94B009FB9E2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -97,12 +106,11 @@
 		00FEBAE02701680600D10841 /* Stock Logger */ = {
 			isa = PBXGroup;
 			children = (
+				00448C462745ACAD00FAD32C /* Delegates */,
 				00914F43271FA94B009FB9E2 /* Models */,
 				003D7A0D271D0B1E00C088D0 /* ViewControllers */,
 				00B11A16271A59BF00BFA504 /* StockModel.xcdatamodeld */,
 				00FEBAF5270176A300D10841 /* Story Boards */,
-				00FEBAE12701680600D10841 /* AppDelegate.swift */,
-				00FEBAE32701680600D10841 /* SceneDelegate.swift */,
 				00FEBAEA2701680B00D10841 /* Assets.xcassets */,
 				00FEBAEF2701680B00D10841 /* Info.plist */,
 			);

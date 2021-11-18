@@ -7,6 +7,9 @@
 
 import Foundation
 
+
+/// CurrencyExchange class used to retrieve USD-CAD exchange rate
+/// This class gets only USD to CAD excange rate
 struct CurrencyExchange: Codable{
     var currency: Currency
     
@@ -16,6 +19,7 @@ struct CurrencyExchange: Codable{
 }
 
 
+/// Currency class gets the exact currency rate from USD to CAD
 struct Currency: Codable{
 
     var rate: String?

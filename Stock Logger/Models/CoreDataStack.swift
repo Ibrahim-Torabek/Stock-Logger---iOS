@@ -9,6 +9,8 @@ import Foundation
 import CoreData
 
 
+/// This class operates Core Data from model.
+/// - Author: Prof. Darren Takaki
 class CoreDataStack{
     private let modelName: String
     
