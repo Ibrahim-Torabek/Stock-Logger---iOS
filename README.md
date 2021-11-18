@@ -158,6 +158,9 @@ This application can be installed on iPhone, iPad and iPod Touch
 ### Images of home screen
 <kbd>![Dashboard](Images/home.png)</kbd>
 
+### Images of detail view screen
+<kbd>![Dashboard](Images/detailView.png)</kbd>
+
 
 ### Images of Add Stock Screen
 <kbd>![AddStock](Images/addStock.png)</kbd>
